@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASACountdown", "NASACountdown.csproj", "{09A38BA8-C4F5-4B8E-806D-29C507B4FF92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASACountdown.Tests", "..\NASACountdown.Tests\NASACountdown.Tests.csproj", "{ED38ED0F-1219-4B84-91F0-669F3EAE21EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09A38BA8-C4F5-4B8E-806D-29C507B4FF92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09A38BA8-C4F5-4B8E-806D-29C507B4FF92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09A38BA8-C4F5-4B8E-806D-29C507B4FF92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09A38BA8-C4F5-4B8E-806D-29C507B4FF92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED38ED0F-1219-4B84-91F0-669F3EAE21EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED38ED0F-1219-4B84-91F0-669F3EAE21EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED38ED0F-1219-4B84-91F0-669F3EAE21EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED38ED0F-1219-4B84-91F0-669F3EAE21EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
