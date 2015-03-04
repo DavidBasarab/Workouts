@@ -88,6 +88,54 @@ namespace PokerHands.Tests
         }
 
         [Test]
+        public void Hand1WithHighestPairWinsPairOfFives()
+        {
+            var hand1 = new[]
+                        {
+                                new Card(Suit.Heart, CardValue.Two),
+                                new Card(Suit.Diamond, CardValue.Five),
+                                new Card(Suit.Club, CardValue.Five),
+                                new Card(Suit.Club, CardValue.Six),
+                                new Card(Suit.Heart, CardValue.Ace)
+                        };
+
+            var hand2 = new[]
+                        {
+                                new Card(Suit.Club, CardValue.Ten),
+                                new Card(Suit.Club, CardValue.Four),
+                                new Card(Suit.Club, CardValue.Two),
+                                new Card(Suit.Heart, CardValue.Nine),
+                                new Card(Suit.Diamond, CardValue.Four)
+                        };
+
+            RankHands(hand1, hand2, 1);
+        }
+
+        [Test]
+        public void Hand1WithHighestPairWinsPairOfKings()
+        {
+            var hand1 = new[]
+                        {
+                                new Card(Suit.Heart, CardValue.Two),
+                                new Card(Suit.Diamond, CardValue.King),
+                                new Card(Suit.Club, CardValue.King),
+                                new Card(Suit.Club, CardValue.Six),
+                                new Card(Suit.Heart, CardValue.Ace)
+                        };
+
+            var hand2 = new[]
+                        {
+                                new Card(Suit.Club, CardValue.Ten),
+                                new Card(Suit.Club, CardValue.Four),
+                                new Card(Suit.Club, CardValue.Two),
+                                new Card(Suit.Heart, CardValue.Nine),
+                                new Card(Suit.Diamond, CardValue.Four)
+                        };
+
+            RankHands(hand1, hand2, 1);
+        }
+
+        [Test]
         public void Hand2WithHighestPairWinsPairOfTwos()
         {
             var hand1 = new[]
