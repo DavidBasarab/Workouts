@@ -7,6 +7,22 @@ namespace PokerHands
     {
         public int RankHands(IList<Card> hand1, IList<Card> hand2)
         {
+            var hand1Flush = hand1.All(i => i.Suit == hand1.Select(j => j.Suit).FirstOrDefault());
+            var hand2Flush = hand2.All(i => i.Suit == hand2.Select(j => j.Suit).FirstOrDefault());
+
+            if (hand1Flush || hand2Flush)
+            {
+                if (hand1Flush && !hand2Flush)
+                {
+                    return 1;
+                }
+
+                if (!hand1Flush)
+                {
+                    return 2;
+                }
+            }
+
             var hand1ByValues = hand1.GroupBy(i => i.CardValue).Select(g => new
                                                                             {
                                                                                     Value = g.Key,
@@ -18,6 +34,54 @@ namespace PokerHands
                                                                                     Value = g.Key,
                                                                                     Count = g.Select(v => (int)v.CardValue).Count()
                                                                             }).ToList();
+
+            var lowestHand1Value = hand1ByValues.OrderBy(i => (int)i.Value).Select(i => (int)i.Value).FirstOrDefault();
+
+            var isHand1AStraight = true;
+
+            for (var i = 0; i < hand1ByValues.Count; i++)
+            {
+                if (hand1ByValues.Any(v => (int)v.Value == (lowestHand1Value))) lowestHand1Value = lowestHand1Value + 1;
+                else
+                {
+                    isHand1AStraight = false;
+
+                    break;
+                }
+            }
+
+            var lowestHand2Value = hand2ByValues.OrderBy(i => (int)i.Value).Select(i => (int)i.Value).FirstOrDefault();
+
+            var isHand2AStraight = true;
+
+            foreach (var value in hand2ByValues)
+            {
+                if (hand2ByValues.Any(v => (int)v.Value == (lowestHand2Value))) lowestHand2Value = lowestHand2Value + 1;
+                else
+                {
+                    isHand2AStraight = false;
+
+                    break;
+                }
+            }
+
+            // One of the hands is a straight
+            if (isHand1AStraight || isHand2AStraight)
+            {
+                if (isHand1AStraight && !isHand2AStraight) return 1;
+
+                if (!isHand1AStraight) return 2;
+
+                // Both are Straights
+                var hand1HighCard = hand1ByValues.OrderByDescending(i => i.Value).Select(i => (int)i.Value).FirstOrDefault();
+                var hand2HighCard = hand2ByValues.OrderByDescending(i => i.Value).Select(i => (int)i.Value).FirstOrDefault();
+
+                if (hand1HighCard > hand2HighCard) return 1;
+
+                if (hand1HighCard < hand2HighCard) return 2;
+
+                return -1;
+            }
 
             // One of the Hands have 3 of a Kind
             if (hand1ByValues.Any(i => i.Count == 3) || hand2ByValues.Any(i => i.Count == 3))
