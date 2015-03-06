@@ -21,11 +21,16 @@ namespace PokerHands
 
             if (hand1ByValues.Any(i => i.Count == 4) || hand2ByValues.Any(i => i.Count == 4))
             {
-                if (hand1ByValues.Any(i => i.Count == 4)) return 1;
+                if (hand1ByValues.Any(i => i.Count == 4) && hand2ByValues.All(i => i.Count != 4)) return 1;
 
-                if (hand2ByValues.Any(i => i.Count == 4)) return 2;
+                if (hand2ByValues.Any(i => i.Count == 4) && hand1ByValues.All(i => i.Count != 4)) return 2;
 
-                return -1;
+                var hand1FourOfAKindValue = hand1ByValues.Where(i => i.Count == 4).Select(i => (int)i.Value).FirstOrDefault();
+                var hand2FourOfAKindValue = hand2ByValues.Where(i => i.Count == 4).Select(i => (int)i.Value).FirstOrDefault();
+
+                if (hand1FourOfAKindValue > hand2FourOfAKindValue) return 1;
+
+                if (hand2FourOfAKindValue > hand1FourOfAKindValue) return 2;
             }
 
             if ((hand1ByValues.Any(i => i.Count == 3) && hand1ByValues.Any(i => i.Count == 2)) || (hand2ByValues.Any(i => i.Count == 3) && hand2ByValues.Any(i => i.Count == 2)))
