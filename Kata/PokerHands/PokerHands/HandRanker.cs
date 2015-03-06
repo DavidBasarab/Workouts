@@ -19,6 +19,17 @@ namespace PokerHands
                                                                                     Count = g.Select(v => (int)v.CardValue).Count()
                                                                             }).ToList();
 
+            // One of the Hands have 3 of a Kind
+            if (hand1ByValues.Any(i => i.Count == 3) || hand2ByValues.Any(i => i.Count == 3))
+            {
+                var hand1ThreeOfAKindValue = hand1ByValues.Where(i => i.Count == 3).Select(i => i.Value).FirstOrDefault();
+                var hand2ThreeOfAKindValue = hand2ByValues.Where(i => i.Count == 3).Select(i => i.Value).FirstOrDefault();
+
+                if (hand1ThreeOfAKindValue > hand2ThreeOfAKindValue) return 1;
+
+                if (hand2ThreeOfAKindValue > hand1ThreeOfAKindValue) return 2;
+            }
+
             // One of the hands have 2 pairs
             if (hand1ByValues.Count(i => i.Count == 2) == 2 || hand2ByValues.Count(i => i.Count == 2) == 2)
             {
@@ -30,15 +41,9 @@ namespace PokerHands
                 var hand1HighestPairValue = hand1ByValues.Where(i => i.Count == 2).OrderByDescending(i => i.Value).Select(i => i.Value).FirstOrDefault();
                 var hand2HighestPairValue = hand2ByValues.Where(i => i.Count == 2).OrderByDescending(i => i.Value).Select(i => i.Value).FirstOrDefault();
 
-                if (hand1HighestPairValue > hand2HighestPairValue)
-                {
-                    return 1;
-                }
+                if (hand1HighestPairValue > hand2HighestPairValue) return 1;
 
-                if (hand1HighestPairValue < hand2HighestPairValue)
-                {
-                    return 2;
-                }
+                if (hand1HighestPairValue < hand2HighestPairValue) return 2;
 
                 // Same Highest Pair must compare next
                 hand1ByValues = hand1ByValues.Where(i => i.Value != hand1HighestPairValue).ToList();

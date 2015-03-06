@@ -910,5 +910,102 @@ namespace PokerHands.Tests
 
             winner.Should().Be(expectedWinner);
         }
+
+        [Test]
+        public void Hand1WinsWithThreeOfAKindTens()
+        {
+            var hand1 = new List<Card>
+                        {
+                                new Card(Suit.Club, CardValue.Ten),
+                                new Card(Suit.Diamond, CardValue.Ten),
+                                new Card(Suit.Heart, CardValue.Ten),
+                                new Card(Suit.Spade, CardValue.Four),
+                                new Card(Suit.Heart, CardValue.King)
+                        };
+
+            var hand2 = new List<Card>
+                        {
+                                new Card(Suit.Spade, CardValue.Two),
+                                new Card(Suit.Heart, CardValue.Two),
+                                new Card(Suit.Diamond, CardValue.Four),
+                                new Card(Suit.Club, CardValue.Four),
+                                new Card(Suit.Heart, CardValue.Ace)
+                        };
+
+            RankHands(hand1, hand2, 1);
+        }
+
+        [Test]
+        public void Hand2WinsWithThreeOfAKindJacks()
+        {
+            var hand1 = new List<Card>
+                        {
+                                new Card(Suit.Club, CardValue.Ten),
+                                new Card(Suit.Diamond, CardValue.Seven),
+                                new Card(Suit.Heart, CardValue.Ten),
+                                new Card(Suit.Spade, CardValue.Four),
+                                new Card(Suit.Heart, CardValue.King)
+                        };
+
+            var hand2 = new List<Card>
+                        {
+                                new Card(Suit.Spade, CardValue.Jack),
+                                new Card(Suit.Heart, CardValue.Jack),
+                                new Card(Suit.Diamond, CardValue.Jack),
+                                new Card(Suit.Club, CardValue.Four),
+                                new Card(Suit.Heart, CardValue.Ace)
+                        };
+
+            RankHands(hand1, hand2, 2);
+        }
+
+        [Test]
+        public void Hand1WinsWithThreeOfAKindTensAgainistHand2ThreeOfAKind()
+        {
+            var hand1 = new List<Card>
+                        {
+                                new Card(Suit.Club, CardValue.Ten),
+                                new Card(Suit.Diamond, CardValue.Ten),
+                                new Card(Suit.Heart, CardValue.Ten),
+                                new Card(Suit.Spade, CardValue.Four),
+                                new Card(Suit.Heart, CardValue.King)
+                        };
+
+            var hand2 = new List<Card>
+                        {
+                                new Card(Suit.Spade, CardValue.Two),
+                                new Card(Suit.Heart, CardValue.Two),
+                                new Card(Suit.Diamond, CardValue.Two),
+                                new Card(Suit.Club, CardValue.Four),
+                                new Card(Suit.Heart, CardValue.Ace)
+                        };
+
+            RankHands(hand1, hand2, 1);
+        }
+
+        [Test]
+        public void Hand2WinsWithThreeOfAKindJacksAgainistHand1ThreeOfAKind()
+        {
+            var hand1 = new List<Card>
+                        {
+                                new Card(Suit.Club, CardValue.Ten),
+                                new Card(Suit.Diamond, CardValue.Ten),
+                                new Card(Suit.Heart, CardValue.Ten),
+                                new Card(Suit.Spade, CardValue.Four),
+                                new Card(Suit.Heart, CardValue.King)
+                        };
+
+            var hand2 = new List<Card>
+                        {
+                                new Card(Suit.Spade, CardValue.Jack),
+                                new Card(Suit.Heart, CardValue.Jack),
+                                new Card(Suit.Diamond, CardValue.Jack),
+                                new Card(Suit.Club, CardValue.Four),
+                                new Card(Suit.Heart, CardValue.Ace)
+                        };
+
+            RankHands(hand1, hand2, 2);
+        }
+
     }
 }
