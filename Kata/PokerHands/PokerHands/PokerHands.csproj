@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CardRank.cs" />
+    <Compile Include="CardValue.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="HandRanker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
