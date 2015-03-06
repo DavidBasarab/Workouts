@@ -7,22 +7,6 @@ namespace PokerHands
     {
         public int RankHands(IList<Card> hand1, IList<Card> hand2)
         {
-            var hand1Flush = hand1.All(i => i.Suit == hand1.Select(j => j.Suit).FirstOrDefault());
-            var hand2Flush = hand2.All(i => i.Suit == hand2.Select(j => j.Suit).FirstOrDefault());
-
-            if (hand1Flush || hand2Flush)
-            {
-                if (hand1Flush && !hand2Flush)
-                {
-                    return 1;
-                }
-
-                if (!hand1Flush)
-                {
-                    return 2;
-                }
-            }
-
             var hand1ByValues = hand1.GroupBy(i => i.CardValue).Select(g => new
                                                                             {
                                                                                     Value = g.Key,
@@ -34,6 +18,33 @@ namespace PokerHands
                                                                                     Value = g.Key,
                                                                                     Count = g.Select(v => (int)v.CardValue).Count()
                                                                             }).ToList();
+
+            if (hand1ByValues.Any(i => i.Count == 4) || hand2ByValues.Any(i => i.Count == 4))
+            {
+                if (hand1ByValues.Any(i => i.Count == 4)) return 1;
+
+                if (hand2ByValues.Any(i => i.Count == 4)) return 2;
+
+                return -1;
+            }
+
+            if ((hand1ByValues.Any(i => i.Count == 3) && hand1ByValues.Any(i => i.Count == 2)) || (hand2ByValues.Any(i => i.Count == 3) && hand2ByValues.Any(i => i.Count == 2)))
+            {
+                // Full house
+                if ((hand1ByValues.Any(i => i.Count == 3) && hand1ByValues.Any(i => i.Count == 2)) && !(hand2ByValues.Any(i => i.Count == 3) && hand2ByValues.Any(i => i.Count == 2))) return 1;
+
+                if (!(hand1ByValues.Any(i => i.Count == 3) && hand1ByValues.Any(i => i.Count == 2))) return 2;
+            }
+
+            var hand1Flush = hand1.All(i => i.Suit == hand1.Select(j => j.Suit).FirstOrDefault());
+            var hand2Flush = hand2.All(i => i.Suit == hand2.Select(j => j.Suit).FirstOrDefault());
+
+            if (hand1Flush || hand2Flush)
+            {
+                if (hand1Flush && !hand2Flush) return 1;
+
+                if (!hand1Flush) return 2;
+            }
 
             var lowestHand1Value = hand1ByValues.OrderBy(i => (int)i.Value).Select(i => (int)i.Value).FirstOrDefault();
 
