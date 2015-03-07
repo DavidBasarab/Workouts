@@ -1438,5 +1438,53 @@ namespace PokerHands.Tests
 
             winner.Should().Be(expectedWinner);
         }
+
+        [Test]
+        public void Hand1WinsWithStraightFlushJackHigh()
+        {
+            var hand1 = new List<Card>
+                        {
+                                new Card(Suit.Club, CardValue.Seven),
+                                new Card(Suit.Club, CardValue.Eight),
+                                new Card(Suit.Club, CardValue.Nine),
+                                new Card(Suit.Club, CardValue.Ten),
+                                new Card(Suit.Club, CardValue.Jack)
+                        };
+
+            var hand2 = new List<Card>
+                        {
+                                new Card(Suit.Spade, CardValue.Four),
+                                new Card(Suit.Spade, CardValue.Five),
+                                new Card(Suit.Spade, CardValue.Six),
+                                new Card(Suit.Spade, CardValue.Seven),
+                                new Card(Suit.Spade, CardValue.Eight)
+                        };
+
+            RankHands(hand1, hand2, 1);
+        }
+
+        [Test]
+        public void Hand2WinsWithStraightFlushEightHigh()
+        {
+            var hand1 = new List<Card>
+                        {
+                                new Card(Suit.Club, CardValue.Three),
+                                new Card(Suit.Club, CardValue.Four),
+                                new Card(Suit.Club, CardValue.Five),
+                                new Card(Suit.Club, CardValue.Six),
+                                new Card(Suit.Club, CardValue.Seven)
+                        };
+
+            var hand2 = new List<Card>
+                        {
+                                new Card(Suit.Spade, CardValue.Four),
+                                new Card(Suit.Spade, CardValue.Five),
+                                new Card(Suit.Spade, CardValue.Six),
+                                new Card(Suit.Spade, CardValue.Seven),
+                                new Card(Suit.Spade, CardValue.Eight)
+                        };
+
+            RankHands(hand1, hand2, 2);
+        }
     }
 }

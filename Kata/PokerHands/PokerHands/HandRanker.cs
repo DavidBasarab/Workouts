@@ -64,7 +64,19 @@ namespace PokerHands
                     return 1;
                 }
 
-                return -1;
+                var hand1MaxValue = hand1ByValues.OrderByDescending(i => (int)i.Value).Select(i => (int)i.Value).FirstOrDefault();
+                var hand2MaxValue = hand2ByValues.OrderByDescending(i => (int)i.Value).Select(i => (int)i.Value).FirstOrDefault();
+
+                if (hand1MaxValue > hand2MaxValue)
+                {
+                    return 1;
+                }
+
+                if (hand1MaxValue < hand2MaxValue)
+                {
+                    return 2;
+                }
+
             }
 
 
