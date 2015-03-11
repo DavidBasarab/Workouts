@@ -99,6 +99,20 @@ namespace PokerHands
                 var hand1MaxValue = hand1ByValues.OrderByDescending(i => (int)i.Value).Select(i => (int)i.Value).FirstOrDefault();
                 var hand2MaxValue = hand2ByValues.OrderByDescending(i => (int)i.Value).Select(i => (int)i.Value).FirstOrDefault();
 
+                if (hand1MaxValue == 12)
+                {
+                    var lowCard = hand1ByValues.OrderBy(i => i.Value).Select(i => (int)i.Value).FirstOrDefault();
+
+                    if (lowCard == 0) hand1MaxValue = 3;
+                }
+
+                if (hand2MaxValue == 12)
+                {
+                    var lowCard = hand2ByValues.OrderBy(i => i.Value).Select(i => (int)i.Value).FirstOrDefault();
+
+                    if (lowCard == 0) hand2MaxValue = 3;
+                }
+
                 if (hand1MaxValue > hand2MaxValue) return 1;
 
                 if (hand1MaxValue < hand2MaxValue) return 2;
