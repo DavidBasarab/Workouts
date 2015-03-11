@@ -21,31 +21,69 @@ namespace PokerHands
 
             var lowestHand1Value = hand1ByValues.OrderBy(i => (int)i.Value).Select(i => (int)i.Value).FirstOrDefault();
 
-            var isHand1AStraight = true;
+            var isHand1AStraight = hand1ByValues.Count == 5;
 
-            for (var i = 0; i < hand1ByValues.Count; i++)
+            if (hand1ByValues.Count == 5)
             {
-                if (hand1ByValues.Any(v => (int)v.Value == (lowestHand1Value))) lowestHand1Value = lowestHand1Value + 1;
+                if (hand1ByValues.Any(i => i.Value == CardValue.Ace))
+                {
+                    for (var i = 0; i < 4; i++)
+                    {
+                        if (hand1ByValues.Any(v => (int)v.Value == (i))) ;
+                        else
+                        {
+                            isHand1AStraight = false;
+
+                            break;
+                        }
+                    }
+                }
                 else
                 {
-                    isHand1AStraight = false;
+                    for (var i = 0; i < hand1ByValues.Count; i++)
+                    {
+                        if (hand1ByValues.Any(v => (int)v.Value == (lowestHand1Value))) lowestHand1Value = lowestHand1Value + 1;
+                        else
+                        {
+                            isHand1AStraight = false;
 
-                    break;
+                            break;
+                        }
+                    }
                 }
             }
 
             var lowestHand2Value = hand2ByValues.OrderBy(i => (int)i.Value).Select(i => (int)i.Value).FirstOrDefault();
 
-            var isHand2AStraight = true;
+            var isHand2AStraight = hand2ByValues.Count == 5;
 
-            foreach (var value in hand2ByValues)
+            if (hand2ByValues.All(i => i.Count > 0 && i.Count < 2))
             {
-                if (hand2ByValues.Any(v => (int)v.Value == (lowestHand2Value))) lowestHand2Value = lowestHand2Value + 1;
+                if (hand2ByValues.Any(i => i.Value == CardValue.Ace))
+                {
+                    for (var i = 0; i < 4; i++)
+                    {
+                        if (hand2ByValues.Any(v => (int)v.Value == (i))) ;
+                        else
+                        {
+                            isHand2AStraight = false;
+
+                            break;
+                        }
+                    }
+                }
                 else
                 {
-                    isHand2AStraight = false;
+                    foreach (var value in hand2ByValues)
+                    {
+                        if (hand2ByValues.Any(v => (int)v.Value == (lowestHand2Value))) lowestHand2Value = lowestHand2Value + 1;
+                        else
+                        {
+                            isHand2AStraight = false;
 
-                    break;
+                            break;
+                        }
+                    }
                 }
             }
 
@@ -54,31 +92,17 @@ namespace PokerHands
 
             if ((hand1Flush && isHand1AStraight) || (hand2Flush && isHand2AStraight))
             {
-                if (!(hand1Flush && isHand1AStraight))
-                {
-                    return 2;
-                }
+                if (!(hand1Flush && isHand1AStraight)) return 2;
 
-                if (!(hand2Flush && isHand2AStraight))
-                {
-                    return 1;
-                }
+                if (!(hand2Flush && isHand2AStraight)) return 1;
 
                 var hand1MaxValue = hand1ByValues.OrderByDescending(i => (int)i.Value).Select(i => (int)i.Value).FirstOrDefault();
                 var hand2MaxValue = hand2ByValues.OrderByDescending(i => (int)i.Value).Select(i => (int)i.Value).FirstOrDefault();
 
-                if (hand1MaxValue > hand2MaxValue)
-                {
-                    return 1;
-                }
+                if (hand1MaxValue > hand2MaxValue) return 1;
 
-                if (hand1MaxValue < hand2MaxValue)
-                {
-                    return 2;
-                }
-
+                if (hand1MaxValue < hand2MaxValue) return 2;
             }
-
 
             if (hand1ByValues.Any(i => i.Count == 4) || hand2ByValues.Any(i => i.Count == 4))
             {
@@ -119,6 +143,20 @@ namespace PokerHands
                 // Both are Straights
                 var hand1HighCard = hand1ByValues.OrderByDescending(i => i.Value).Select(i => (int)i.Value).FirstOrDefault();
                 var hand2HighCard = hand2ByValues.OrderByDescending(i => i.Value).Select(i => (int)i.Value).FirstOrDefault();
+
+                if (hand1HighCard == 12)
+                {
+                    var lowCard = hand1ByValues.OrderBy(i => i.Value).Select(i => (int)i.Value).FirstOrDefault();
+
+                    if (lowCard == 0) hand1HighCard = 3;
+                }
+
+                if (hand2HighCard == 12)
+                {
+                    var lowCard = hand2ByValues.OrderBy(i => i.Value).Select(i => (int)i.Value).FirstOrDefault();
+
+                    if (lowCard == 0) hand2HighCard = 3;
+                }
 
                 if (hand1HighCard > hand2HighCard) return 1;
 
