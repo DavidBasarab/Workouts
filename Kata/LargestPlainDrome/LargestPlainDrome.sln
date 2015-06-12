@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LargestPlainDrome", "LargestPlainDrome\LargestPlainDrome.csproj", "{4BFD2E40-EC69-4551-95C5-E5B9BFDA0BB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LargestPlainDrome.Tests", "LargestPlainDrome.Tests\LargestPlainDrome.Tests.csproj", "{991D43D1-C8F7-48EC-A309-B33E768DA9F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BFD2E40-EC69-4551-95C5-E5B9BFDA0BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BFD2E40-EC69-4551-95C5-E5B9BFDA0BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BFD2E40-EC69-4551-95C5-E5B9BFDA0BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BFD2E40-EC69-4551-95C5-E5B9BFDA0BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{991D43D1-C8F7-48EC-A309-B33E768DA9F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{991D43D1-C8F7-48EC-A309-B33E768DA9F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{991D43D1-C8F7-48EC-A309-B33E768DA9F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{991D43D1-C8F7-48EC-A309-B33E768DA9F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
