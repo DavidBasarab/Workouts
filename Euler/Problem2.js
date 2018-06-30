@@ -16,8 +16,6 @@ var previousTerm = 0;
 var currentTerm = 1;
 var sum = 0;
 
-// 4,000,000
-
 for (var i = 0; i < 100; i++) {
     var nextTerm = previousTerm + currentTerm;
 
