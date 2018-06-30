@@ -1,3 +1,5 @@
+var primes = null;
+
 module.exports = {
     isMultipleOf: function (value, multipleNumber) {
         return value % multipleNumber == 0;
@@ -14,16 +16,24 @@ module.exports = {
 
         return (number > 1);
     },
-    getPrimes: function (max) {
-        if (max == null) max = 100;
+    getPrimes: function () {
 
-        var sieve = [], i, j, primes = [];
+        if(primes != null) return primes;
+
+        console.log("Finding Primes");
+
+        var max = 100;
+
+        primes = [];
+
+        var sieve = [], i, j = [];
+
         for (i = 2; i <= max; ++i) {
             if (!sieve[i]) {
 
                 // i has not been marked -- it is prime
                 primes.push(i);
-                
+
                 for (j = i << 1; j <= max; j += i) {
                     sieve[j] = true;
                 }
