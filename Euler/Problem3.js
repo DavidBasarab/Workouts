@@ -11,13 +11,13 @@ var primes = common.getPrimes();
 function findPrimesOfANumber(number) {
     var factors = [];
 
-    //console.log(`findPrimesOfANumber := ${number}`);
+    console.log(`findPrimesOfANumber := ${number}`);
 
     if (primes.includes(number)) {
         
         factors.push(number);
 
-        //console.log(`Returning ${factors}`);
+        console.log(`Returning ${factors}`);
         
         return factors;
     }
@@ -36,17 +36,17 @@ function findPrimesOfANumber(number) {
         currentFactorsTotal *= element;
     });
 
-    //console.log(`currentFactorsTotal := ${currentFactorsTotal}`);
+    console.log(`currentFactorsTotal := ${currentFactorsTotal}`);
 
     if (currentFactorsTotal == number) return factors;
 
     var nextFactors = findPrimesOfANumber(number - currentFactorsTotal);
 
-    //console.log(`NEXT ${nextFactors}`);
+    console.log(`NEXT ${nextFactors}`);
 
     var finalArray = factors.concat(nextFactors);
 
-    //console.log(`FINAL ${finalArray}`);
+    console.log(`FINAL ${finalArray}`);
 
     return finalArray;
 }
