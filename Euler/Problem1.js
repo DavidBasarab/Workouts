@@ -1,13 +1,11 @@
-function isMultipleOf(value, multipleNumber) {
-    return value % multipleNumber == 0;
-}
+var common = require("./common");
 
 function isMultipleOf5(value) {
-    return isMultipleOf(value, 5);
+    return common.isMultipleOf(value, 5);
 }
 
 function isMultipleOf3(value) {
-    return isMultipleOf(value, 3);
+    return common.isMultipleOf(value, 3);
 }
 
 console.log("This is going to be Problem 1");
