@@ -24,8 +24,8 @@ function findMaxThatCanBeEvenlyDivided(maxNumber) {
     }
 }
 
-var stoppingNumber = 10;
+var stoppingNumber = 20;
 
-var smallest = findMaxThatCanBeEvenlyDivided(10);
+var smallest = findMaxThatCanBeEvenlyDivided(20);
 
 console.log(`Smallest number that can deviced 1 to ${stoppingNumber} is ${smallest}`);
