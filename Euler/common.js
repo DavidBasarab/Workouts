@@ -22,7 +22,7 @@ module.exports = {
 
         console.log("Finding Primes");
 
-        var max = 100;
+        var max = 10000;
 
         primes = [];
 

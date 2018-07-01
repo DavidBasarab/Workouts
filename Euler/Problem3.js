@@ -11,13 +11,9 @@ var primes = common.getPrimes();
 function findPrimesOfANumber(number) {
     var factors = [];
 
-    console.log(`findPrimesOfANumber := ${number}`);
-
     if (primes.includes(number)) {
         
         factors.push(number);
-
-        console.log(`Returning ${factors}`);
         
         return factors;
     }
@@ -27,28 +23,14 @@ function findPrimesOfANumber(number) {
 
         if (number % currentPrime == 0) {
             factors.push(currentPrime);
+
+            factors = factors.concat(findPrimesOfANumber(number / currentPrime));
+
+            break;
         }
     }
 
-    var currentFactorsTotal = 1;
-
-    factors.forEach(function (element) {
-        currentFactorsTotal *= element;
-    });
-
-    console.log(`currentFactorsTotal := ${currentFactorsTotal}`);
-
-    if (currentFactorsTotal == number) return factors;
-
-    var nextFactors = findPrimesOfANumber(number - currentFactorsTotal);
-
-    console.log(`NEXT ${nextFactors}`);
-
-    var finalArray = factors.concat(nextFactors);
-
-    console.log(`FINAL ${finalArray}`);
-
-    return finalArray;
+    return factors;
 }
 
 process.argv.forEach(function (val, index, array) {
@@ -59,14 +41,20 @@ var number = process.argv[2];
 
 console.log(`Going to find prime factors of ${number}`);
 
+console.log(`2 := ${findPrimesOfANumber(2)}`);
+console.log(`3 := ${findPrimesOfANumber(3)}`);
+console.log(`4 := ${findPrimesOfANumber(4)}`);
+console.log(`12 := ${findPrimesOfANumber(12)}`);
+console.log(`147 := ${findPrimesOfANumber(147)}`);
 
+var finalProblem = findPrimesOfANumber(number);
+var total = 1;
 
-primes.forEach(function (element) {
-    console.log(`Prime := ${element}`);
+finalProblem.forEach(function(element){
+    total *= element;
 });
 
-//console.log(`2 := ${findPrimesOfANumber(2)}`);
-//console.log(`3 := ${findPrimesOfANumber(3)}`);
-//console.log(`4 := ${findPrimesOfANumber(4)}`);
-console.log(`12 := ${findPrimesOfANumber(12)}`);
-//console.log(`147 := ${findPrimesOfANumber(147)}`);
+
+
+
+console.log(`${number} := ${finalProblem} | total := ${total}`);
