@@ -41,6 +41,30 @@ module.exports = {
         }
         return primes;
     },
+    getPrimeFactors: function (number) {
+        var factors = [];
+
+        if (primes.includes(number)) {
+
+            factors.push(number);
+
+            return factors;
+        }
+
+        for (i = 0; i < primes.length; i++) {
+            var currentPrime = primes[i];
+
+            if (number % currentPrime == 0) {
+                factors.push(currentPrime);
+
+                factors = factors.concat(this.getPrimeFactors(number / currentPrime));
+
+                break;
+            }
+        }
+
+        return factors;
+    },
     runOnLoad: function () {
         this.getPrimes();
 
