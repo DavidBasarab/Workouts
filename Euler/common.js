@@ -18,11 +18,11 @@ module.exports = {
     },
     getPrimes: function () {
 
-        if(primes != null) return primes;
-
-        console.log("Finding Primes");
+        if (primes != null) return primes;
 
         var max = 10000;
+
+        console.log(`Loading all the primes up to ${max}`);
 
         primes = [];
 
@@ -40,5 +40,10 @@ module.exports = {
             }
         }
         return primes;
+    },
+    runOnLoad: function () {
+        this.getPrimes();
+
+        return this;
     }
-}
+}.runOnLoad();
