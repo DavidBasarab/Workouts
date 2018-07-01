@@ -28,6 +28,9 @@ module.exports = {
 
         return primes;
     },
+    isSquare : function(n) {
+        return n > 0 && Math.sqrt(n) % 1 === 0;
+    },
     calulatePrimes : function(max) {
         
         console.log(`Calculating all the primes up to ${max}`);
