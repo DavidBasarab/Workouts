@@ -22,24 +22,31 @@ module.exports = {
 
         var max = 10000;
 
-        console.log(`Loading all the primes up to ${max}`);
+        
 
-        primes = [];
+        primes = this.calulatePrimes(max);
 
+        return primes;
+    },
+    calulatePrimes : function(max) {
+        
+        console.log(`Calculating all the primes up to ${max}`);
+
+        var primeArray = [];
         var sieve = [], i, j = [];
 
         for (i = 2; i <= max; ++i) {
             if (!sieve[i]) {
 
                 // i has not been marked -- it is prime
-                primes.push(i);
+                primeArray.push(i);
 
                 for (j = i << 1; j <= max; j += i) {
                     sieve[j] = true;
                 }
             }
         }
-        return primes;
+        return primeArray;
     },
     getPrimeFactors: function (number) {
         var factors = [];
