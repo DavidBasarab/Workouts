@@ -11,7 +11,7 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 var common = require("./common");
 
 module.exports = {
-    solveProblem: function () {
+    solveProblem: async function () {
         console.log("Problem 2.  Fibonacci");
 
         var previousTerm = 0;
@@ -35,5 +35,5 @@ module.exports = {
 
         console.log(`Sum of Even Terms is ${sum}`);
     }
-}.solveProblem();
+};
 

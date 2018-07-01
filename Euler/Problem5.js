@@ -7,7 +7,7 @@ What is the smallest positive number that is evenly divisible by all of the numb
 var common = require("./common");
 
 module.exports = {
-    solveProblem : function() {
+    solveProblem : async function() {
         function findMaxThatCanBeEvenlyDivided(maxNumber) {
             var currentNumber = maxNumber;
         
@@ -32,4 +32,4 @@ module.exports = {
         
         console.log(`Smallest number that can deviced 1 to ${stoppingNumber} is ${smallest}`);
     }
-}.solveProblem();
+};

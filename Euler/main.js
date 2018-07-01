@@ -10,6 +10,8 @@ var requiredFile = `Problem${problemNumber}.js`;
 
 console.time(timeLabel);
 
-require(`./${requiredFile}`);
+var solver = require(`./${requiredFile}`);
 
-console.timeEnd(timeLabel);
+solver.solveProblem().then(function () {
+    console.timeEnd(timeLabel);
+});

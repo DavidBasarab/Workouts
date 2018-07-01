@@ -7,7 +7,7 @@ What is the largest prime factor of the number 600851475143 ?
 var common = require("./common");
 
 module.exports = {
-    solveProblem: function () {
+    solveProblem: async function () {
         process.argv.forEach(function (val, index, array) {
             console.log(index + ': ' + val);
         });
@@ -31,4 +31,4 @@ module.exports = {
 
         console.log(`${number} := ${finalProblem} | total := ${total}`);
     }
-}.solveProblem();
+};

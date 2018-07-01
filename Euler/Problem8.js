@@ -28,9 +28,12 @@
 */
 
 var common = require("./common");
-var lineReader = require('readline').createInterface({
-    input: require('fs').createReadStream("./Problem8Data.txt")
-});;
+const fs = require('fs');
+const util = require('util');
+
+// Convert fs.readFile into Promise version of same    
+const readFile = util.promisify(fs.readFile);
+
 
 var theNumber = "";
 var numberOfDigits = 13;
@@ -72,17 +75,18 @@ function findProductInNext(startingIndex) {
     return product;
 }
 
+async function getData() {
+    return await readFile("./Problem8Data.txt");
+}
+
 module.exports = {
-    solveProblem: function () {
-        lineReader.on('line', function (line) {
-            console.log('Line from file:', line);
-            theNumber += line;
-        });
+    solveProblem: async function () {
+        var data = await getData();
 
-        lineReader.on('close', function () {
-            var maxProduct = findAdjecentDigitsProduct(numberOfDigits);
+        theNumber = data.toString();
 
-            console.log(`Found Max Product of ${numberOfDigits} Digits to be ${maxProduct}`);
-        });
+        var maxProduct = findAdjecentDigitsProduct(numberOfDigits);
+
+        console.log(`Found Max Product of ${numberOfDigits} Digits to be ${maxProduct}`);
     }
-}.solveProblem();
+};

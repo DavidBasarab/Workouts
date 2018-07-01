@@ -10,7 +10,7 @@
 var common = require("./common");
 
 module.exports = {
-    solveProblem: function () {
+    solveProblem: async function () {
         var maxNumber = 2000000;
 
         var primes = common.calulatePrimes(maxNumber);
@@ -18,6 +18,6 @@ module.exports = {
         var sum = common.sumArray(primes);
 
         console.log(`Primes under ${maxNumber} sums to ${sum}`);
-        
+
     }
-}.solveProblem();
+};

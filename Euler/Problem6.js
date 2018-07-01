@@ -13,7 +13,7 @@
 var common = require("./common");
 
 module.exports = {
-    solveProblem: function () {
+    solveProblem: async function () {
         function sumOfTheSquares(number) {
             var sum = 0;
 
@@ -44,4 +44,4 @@ module.exports = {
         console.log(`Square Sum ${summedSquared} up to ${maxNumber}`);
         console.log(`           Difference ${summedSquared} - ${squareSum} = ${difference}`);
     }
-}.solveProblem();
+};

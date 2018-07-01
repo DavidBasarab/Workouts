@@ -39,18 +39,14 @@ async function getData() {
     return await readFile("./Problem11Data.txt");
 }
 
-getData().then(data => {
-    var lines = data.toString().split("\n");
+module.exports = {
+    solveProblem: async function () {
+        var data = await getData();
 
-    lines.forEach(function(element){
-        console.log(element);
-    });
+        var lines = data.toString().split("\n");
 
-    
-});
-
-// module.exports = {
-//     solveProblem: function () {
-                  
-//     }
-// }.solveProblem();
+        lines.forEach(function (element) {
+            console.log(element);
+        });
+    }
+};

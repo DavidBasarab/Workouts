@@ -1,7 +1,12 @@
+/*
+     Problem from Site
+
+*/
+
 var common = require("./common");
 
 module.exports = {
-    solveProblem: function () {
+    solveProblem: async function () {
         function isMultipleOf5(value) {
             return common.isMultipleOf(value, 5);
         }
@@ -23,4 +28,4 @@ module.exports = {
 
         console.log(`Sum to ${stoppingNumber} is ${sum}`);
     }
-}.solveProblem();
+}

@@ -9,14 +9,13 @@
 var common = require("./common");
 
 module.exports = {
-    solveProblem: function () {
+    solveProblem: async function () {
         var primes = common.calulatePrimes(110000);
 
         console.log(`Prime Length := ${primes.length}`);
 
-        var tenThousandAndOnePrime = primes[10001 - 1];
+        var tenThousandAndOnePrime = primes[10000];
 
         console.log(`lastItem ${tenThousandAndOnePrime}`);
-        
     }
-}.solveProblem();
+};
