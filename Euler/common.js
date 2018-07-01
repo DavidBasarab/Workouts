@@ -22,17 +22,26 @@ module.exports = {
 
         var max = 10000;
 
-        
+
 
         primes = this.calulatePrimes(max);
 
         return primes;
     },
-    isSquare : function(n) {
+    isSquare: function (n) {
         return n > 0 && Math.sqrt(n) % 1 === 0;
     },
-    calulatePrimes : function(max) {
-        
+    sumArray: function (array) {
+        var sum = 0;
+
+        for (var i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+
+        return sum;
+    },
+    calulatePrimes: function (max) {
+
         console.log(`Calculating all the primes up to ${max}`);
 
         var primeArray = [];
