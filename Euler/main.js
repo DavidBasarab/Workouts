@@ -4,7 +4,7 @@ var problemNumber = process.argv[2];
 
 console.log(`Going to run problem ${problemNumber}`);
 
-var timeLabel = `Problem ${problemNumber}`;
+var timeLabel = `Time for Problem ${problemNumber}`;
 
 var requiredFile = `Problem${problemNumber}.js`;
 
