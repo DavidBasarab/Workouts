@@ -35,18 +35,37 @@ const util = require('util');
 // Convert fs.readFile into Promise version of same    
 const readFile = util.promisify(fs.readFile);
 
+var grid;
+
 async function getData() {
     return await readFile("./Problem11Data.txt");
+}
+
+function getPoint(column, row) {
+    console.log(`getPoint(${column}, ${row})`);
+    
+    var line = grid[row];
+    var columns = line.split(" ");
+
+    console.log(line);
+
+    var columnValue = columns[column];
+
+    console.log(`Column Value = ${columnValue}`);
+
+    return parseInt(columnValue);
 }
 
 module.exports = {
     solveProblem: async function () {
         var data = await getData();
 
-        var lines = data.toString().split("\n");
+        grid = data.toString().split("\n");
 
-        lines.forEach(function (element) {
-            console.log(element);
-        });
+        console.log(`Number of Lines = ${grid.length}`);
+
+        var value = getPoint(8, 6);
+
+        console.log(`Value at (8, 6) := ${value}`);
     }
 };
