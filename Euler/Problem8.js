@@ -33,33 +33,35 @@ var lineReader = require('readline').createInterface({
 });;
 
 var theNumber = "";
+var numberOfDigits = 13;
 
-function findAdjecentDigitsProduct(numberOfDigits) {
+function findAdjecentDigitsProduct() {
     var maxProduct = 0;
 
     console.log(`theNumber.length := ${theNumber.length} | numberOfDigits := ${numberOfDigits}`);
 
-    for(i = 0; i < theNumber.length - numberOfDigits; i++) {
+    for (i = 0; i < theNumber.length - numberOfDigits; i++) {
         var currentSlice = theNumber.slice(i, i + numberOfDigits);
 
         var startingLocation = i;
 
         var currentProduct = findProductInNext(startingLocation, numberOfDigits);
-        
-        console.log(`currentSlice := ${currentSlice} | Product = ${currentProduct}`);
 
-        if(currentProduct > maxProduct) maxProduct = currentProduct;
+        if (currentProduct > maxProduct) {
+            console.log(`Slice := ${currentSlice} with Product of ${currentProduct} is now max`);
+            maxProduct = currentProduct;
+        }
     }
 
     return maxProduct;
 }
 
-function findProductInNext(startingIndex, numberOfDigits) {
+function findProductInNext(startingIndex) {
     var product = 1;
 
     var currentIndex = startingIndex;
 
-    for(counter = 0; counter < numberOfDigits; counter++) {
+    for (counter = 0; counter < numberOfDigits; counter++) {
         var currentNumber = parseInt(theNumber[currentIndex]);
 
         product *= currentNumber;
@@ -77,10 +79,10 @@ module.exports = {
             theNumber += line;
         });
 
-        lineReader.on('close', function(){
-            var maxProduct = findAdjecentDigitsProduct(4);
+        lineReader.on('close', function () {
+            var maxProduct = findAdjecentDigitsProduct(numberOfDigits);
 
-            console.log(`Found Max Product of ${4} Digits to be ${maxProduct}`);
+            console.log(`Found Max Product of ${numberOfDigits} Digits to be ${maxProduct}`);
         });
     }
 }.solveProblem();
