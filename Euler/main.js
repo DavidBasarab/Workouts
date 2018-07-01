@@ -1,3 +1,5 @@
+var common = require("./common");
+
 console.log("This is my NodeJs Project Euler Test Runner");
 
 var problemNumber = process.argv[2];
