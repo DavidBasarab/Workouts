@@ -6,26 +6,30 @@ What is the smallest positive number that is evenly divisible by all of the numb
 
 var common = require("./common");
 
-function findMaxThatCanBeEvenlyDivided(maxNumber) {
-    var currentNumber = maxNumber;
-
-    while(true) {
-        var allMatch = true;
-        for(var n = 3; n < maxNumber; n++) {
-            if(currentNumber % n != 0) {
-                allMatch = false;
-                break;
+module.exports = {
+    solveProblem : function() {
+        function findMaxThatCanBeEvenlyDivided(maxNumber) {
+            var currentNumber = maxNumber;
+        
+            while(true) {
+                var allMatch = true;
+                for(var n = 3; n < maxNumber; n++) {
+                    if(currentNumber % n != 0) {
+                        allMatch = false;
+                        break;
+                    }
+                }
+        
+                if(allMatch) return currentNumber;
+        
+                currentNumber += maxNumber;
             }
         }
-
-        if(allMatch) return currentNumber;
-
-        currentNumber += maxNumber;
+        
+        var stoppingNumber = 20;
+        
+        var smallest = findMaxThatCanBeEvenlyDivided(20);
+        
+        console.log(`Smallest number that can deviced 1 to ${stoppingNumber} is ${smallest}`);
     }
-}
-
-var stoppingNumber = 20;
-
-var smallest = findMaxThatCanBeEvenlyDivided(20);
-
-console.log(`Smallest number that can deviced 1 to ${stoppingNumber} is ${smallest}`);
+}.solveProblem();

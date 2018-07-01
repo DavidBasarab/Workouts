@@ -10,25 +10,30 @@ By considering the terms in the Fibonacci sequence whose values do not exceed fo
 
 var common = require("./common");
 
-console.log("Problem 2.  Fibonacci");
+module.exports = {
+    solveProblem: function () {
+        console.log("Problem 2.  Fibonacci");
 
-var previousTerm = 0;
-var currentTerm = 1;
-var sum = 0;
+        var previousTerm = 0;
+        var currentTerm = 1;
+        var sum = 0;
 
-for (var i = 0; i < 100; i++) {
-    var nextTerm = previousTerm + currentTerm;
+        for (var i = 0; i < 100; i++) {
+            var nextTerm = previousTerm + currentTerm;
 
-    if(nextTerm > 4000000) break;
+            if (nextTerm > 4000000) break;
 
-    if(common.isEven(nextTerm)) {
-        sum += nextTerm;
+            if (common.isEven(nextTerm)) {
+                sum += nextTerm;
+            }
+
+            previousTerm = currentTerm;
+            currentTerm = nextTerm;
+        }
+
+        console.log(`Final Term := ${currentTerm}`);
+
+        console.log(`Sum of Even Terms is ${sum}`);
     }
+}.solveProblem();
 
-    previousTerm = currentTerm;
-    currentTerm = nextTerm;
-}
-
-console.log(`Final Term := ${currentTerm}`);
-
-console.log(`Sum of Even Terms is ${sum}`);

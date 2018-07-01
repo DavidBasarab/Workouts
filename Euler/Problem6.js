@@ -12,32 +12,36 @@
 
 var common = require("./common");
 
-function sumOfTheSquares(number) {
-    var sum = 0;
+module.exports = {
+    solveProblem: function () {
+        function sumOfTheSquares(number) {
+            var sum = 0;
 
-    for(var i = 1; i <= number; i++) {
-        sum += Math.pow(i, 2);
+            for (var i = 1; i <= number; i++) {
+                sum += Math.pow(i, 2);
+            }
+
+            return sum;
+        }
+
+        function sumOfNumbers(number) {
+            var sum = 0;
+
+            for (var i = 1; i <= number; i++) {
+                sum += i;
+            }
+
+            return sum;
+        }
+
+        var maxNumber = 100;
+
+        var squareSum = sumOfTheSquares(maxNumber);
+        var summedSquared = Math.pow(sumOfNumbers(maxNumber), 2);
+        var difference = summedSquared - squareSum;
+
+        console.log(`Sum of the Squares ${squareSum} up to ${maxNumber}`);
+        console.log(`Square Sum ${summedSquared} up to ${maxNumber}`);
+        console.log(`           Difference ${summedSquared} - ${squareSum} = ${difference}`);
     }
-
-    return sum;
-}
-
-function sumOfNumbers(number) {
-    var sum = 0;
-
-    for(var i = 1; i <= number; i++) {
-        sum += i;
-    }
-
-    return sum;
-}
-
-var maxNumber = 100;
-
-var squareSum = sumOfTheSquares(maxNumber);
-var summedSquared = Math.pow(sumOfNumbers(maxNumber), 2);
-var difference = summedSquared - squareSum;
-
-console.log(`Sum of the Squares ${squareSum} up to ${maxNumber}`);
-console.log(`Square Sum ${summedSquared} up to ${maxNumber}`);
-console.log(`           Difference ${summedSquared} - ${squareSum} = ${difference}`);
+}.solveProblem();
