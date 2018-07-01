@@ -22,6 +22,22 @@ function sumOfTheSquares(number) {
     return sum;
 }
 
-var squareSum = sumOfTheSquares(10);
+function sumOfNumbers(number) {
+    var sum = 0;
 
-console.log(`Sum of the Squares ${squareSum}`);
+    for(var i = 1; i <= number; i++) {
+        sum += i;
+    }
+
+    return sum;
+}
+
+var maxNumber = 100;
+
+var squareSum = sumOfTheSquares(maxNumber);
+var summedSquared = Math.pow(sumOfNumbers(maxNumber), 2);
+var difference = summedSquared - squareSum;
+
+console.log(`Sum of the Squares ${squareSum} up to ${maxNumber}`);
+console.log(`Square Sum ${summedSquared} up to ${maxNumber}`);
+console.log(`           Difference ${summedSquared} - ${squareSum} = ${difference}`);
