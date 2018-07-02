@@ -100,6 +100,23 @@ function findRightPoints(x, y) {
     return points;
 }
 
+function findDownPoints(x, y) {
+    var points = [];
+
+    //console.log(`(${x}, ${y}) | x + 4 = ${x + 4} | y + 4 = ${y + 4} | maxColumns = ${maxColumns}`);
+
+    if (y + 4 > maxRows) return points;
+
+    for (var i = 0; i < 4; i++) {
+        points.push({
+            x: x,
+            y: y + i
+        });
+    }
+
+    return points;
+}
+
 module.exports = {
     solveProblem: async function () {
         var data = await getData();
@@ -123,9 +140,12 @@ module.exports = {
                 //console.log(colors.green(`diagonalPoints := ${JSON.stringify(diagonalPoints)}`));
 
                 var rightPoints = findRightPoints(column, row);
-                console.log(colors.green(`rightPoints := ${JSON.stringify(rightPoints)}`));
+                // console.log(colors.green(`rightPoints := ${JSON.stringify(rightPoints)}`));
+                //console.log(`${getPointsValue(rightPoints)}`);
 
-                console.log(`${getPointsValue(rightPoints)}`);
+                var downPoints = findDownPoints(column, row);
+                console.log(colors.green(`downPoints := ${JSON.stringify(downPoints)}`));
+                console.log(`${getPointsValue(downPoints)}`);
 
                 //if (loops > maxRows) return;
 
