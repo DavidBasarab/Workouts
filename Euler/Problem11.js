@@ -130,7 +130,7 @@ module.exports = {
         console.log(`Value at (10, 8) := ${getPointValue(10, 8)}`);
         console.log(`Value at (11, 9) := ${getPointValue(11, 9)}`);
 
-        var loops = 0;
+        var maxProduct = 0;
 
         for (var row = 0; row < maxRows; row++) {
             for (var column = 0; column < maxColumns; column++) {
@@ -144,12 +144,13 @@ module.exports = {
                 //console.log(`${getPointsValue(rightPoints)}`);
 
                 var downPoints = findDownPoints(column, row);
+
                 console.log(colors.green(`downPoints := ${JSON.stringify(downPoints)}`));
-                console.log(`${getPointsValue(downPoints)}`);
 
-                //if (loops > maxRows) return;
+                var values = getPointsValue(downPoints);
 
-                loops++;
+                console.log(`${values} | Product := ${common.productOfArray(values)}`);
+
             }
         }
     }

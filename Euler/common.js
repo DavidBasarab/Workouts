@@ -22,8 +22,6 @@ module.exports = {
 
         var max = 10000;
 
-
-
         primes = this.calulatePrimes(max);
 
         return primes;
@@ -39,6 +37,13 @@ module.exports = {
         }
 
         return sum;
+    },
+    productOfArray : function(array) {
+        var product = 1;
+
+        array.forEach(value => product *= value);
+
+        return product;
     },
     calulatePrimes: function (max) {
 
