@@ -31,6 +31,7 @@
 var common = require("./common");
 const fs = require('fs');
 const util = require('util');
+var colors = require('colors/safe'); 
 
 // Convert fs.readFile into Promise version of same    
 const readFile = util.promisify(fs.readFile);
@@ -85,7 +86,7 @@ module.exports = {
 
         for (var row = 0; row < maxRows; row++) {
             for (var column = 0; column < maxColumns; column++) {
-                console.log(`Examing Point (${column}, ${row})`);
+                console.log(colors.magenta(`Examing Point (${column}, ${row})`));
                 
 
                 var diagonalPoints = findDiagonalPoints(row, column);
