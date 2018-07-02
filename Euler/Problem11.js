@@ -41,7 +41,7 @@ async function getData() {
     return await readFile("./Problem11Data.txt");
 }
 
-function getPoint(column, row) {
+function getPointValue(column, row) {
     //console.log(`getPoint(${column}, ${row})`);
 
     var line = grid[row];
@@ -52,6 +52,22 @@ function getPoint(column, row) {
     return parseInt(columnValue);
 }
 
+function findDiagonalPoints(x, y) {
+    var points = [];
+
+    for (var i = 0; i < 4; i++) {
+        points.push({
+            x: x + i,
+            y: y + i
+        });
+    }
+
+    return points;
+}
+
+var maxRows = 20;
+var maxColumns = 20;
+
 module.exports = {
     solveProblem: async function () {
         var data = await getData();
@@ -60,9 +76,36 @@ module.exports = {
 
         console.log(`Number of Lines = ${grid.length}`);
 
-        console.log(`Value at (8, 6) := ${getPoint(8, 6)}`);
-        console.log(`Value at (9, 7) := ${getPoint(9, 7)}`);
-        console.log(`Value at (10, 8) := ${getPoint(10, 8)}`);
-        console.log(`Value at (11, 9) := ${getPoint(11, 9)}`);
+        console.log(`Value at (8, 6) := ${getPointValue(8, 6)}`);
+        console.log(`Value at (9, 7) := ${getPointValue(9, 7)}`);
+        console.log(`Value at (10, 8) := ${getPointValue(10, 8)}`);
+        console.log(`Value at (11, 9) := ${getPointValue(11, 9)}`);
+
+        var loops = 0;
+
+        for (var row = 0; row < maxRows; row++) {
+            for (var column = 0; column < maxColumns; column++) {
+                console.log(`Examing Point (${column}, ${row})`);
+                
+
+                var diagonalPoints = findDiagonalPoints(row, column);
+
+                console.log(`diagonalPoints := ${JSON.stringify(diagonalPoints)}`);
+
+                var values = [];
+
+                diagonalPoints.forEach(function (point) {
+                    var value = getPointValue(point.x, point.y);
+
+                    values.push(value);
+                });
+
+                console.log(`${values}`);
+
+                if (loops > maxRows) return;
+
+                loops++;
+            }
+        }
     }
 };

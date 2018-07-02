@@ -64,7 +64,7 @@ function findProductInNext(startingIndex) {
 
     var currentIndex = startingIndex;
 
-    for (counter = 0; counter < numberOfDigits; counter++) {
+    for (var counter = 0; counter < numberOfDigits; counter++) {
         var currentNumber = parseInt(theNumber[currentIndex]);
 
         product *= currentNumber;
