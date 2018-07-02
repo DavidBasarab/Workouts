@@ -39,6 +39,7 @@ const readFile = util.promisify(fs.readFile);
 
 var maxRows = 20;
 var maxColumns = 20;
+var maxProduct = 0;
 var grid;
 
 async function getData() {
@@ -71,8 +72,6 @@ function getPointsValue(points) {
 function findDiagonalPoints(x, y) {
     var points = [];
 
-    //console.log(`(${x}, ${y}) | x + 4 = ${x + 4} | y + 4 = ${y + 4} | maxColumns = ${maxColumns}`);
-
     if (x + 4 > maxColumns || y + 4 > maxRows) return points;
 
     for (var i = 0; i < 4; i++) {
@@ -103,8 +102,6 @@ function findRightPoints(x, y) {
 function findDownPoints(x, y) {
     var points = [];
 
-    //console.log(`(${x}, ${y}) | x + 4 = ${x + 4} | y + 4 = ${y + 4} | maxColumns = ${maxColumns}`);
-
     if (y + 4 > maxRows) return points;
 
     for (var i = 0; i < 4; i++) {
@@ -117,6 +114,18 @@ function findDownPoints(x, y) {
     return points;
 }
 
+function determineIfMax(points) {
+    var values = getPointsValue(points);
+
+    var product = common.productOfArray(values);
+
+    if (product > maxProduct) {
+        maxProduct = product;
+
+        console.log(colors.yellow(`${JSON.stringify(points)} | ${values} with a product of ${product} is now the max value.`));
+    }
+}
+
 module.exports = {
     solveProblem: async function () {
         var data = await getData();
@@ -125,33 +134,24 @@ module.exports = {
 
         console.log(`Number of Lines = ${grid.length}`);
 
-        console.log(`Value at (8, 6) := ${getPointValue(8, 6)}`);
-        console.log(`Value at (9, 7) := ${getPointValue(9, 7)}`);
-        console.log(`Value at (10, 8) := ${getPointValue(10, 8)}`);
-        console.log(`Value at (11, 9) := ${getPointValue(11, 9)}`);
-
-        var maxProduct = 0;
-
         for (var row = 0; row < maxRows; row++) {
             for (var column = 0; column < maxColumns; column++) {
-                console.log(colors.magenta(`Examing Point (${column}, ${row})`));
+                //console.log(colors.magenta(`Examing Point (${column}, ${row})`));
 
                 var diagonalPoints = findDiagonalPoints(column, row);
-                //console.log(colors.green(`diagonalPoints := ${JSON.stringify(diagonalPoints)}`));
+
+                determineIfMax(diagonalPoints);
 
                 var rightPoints = findRightPoints(column, row);
-                // console.log(colors.green(`rightPoints := ${JSON.stringify(rightPoints)}`));
-                //console.log(`${getPointsValue(rightPoints)}`);
+
+                determineIfMax(rightPoints);
 
                 var downPoints = findDownPoints(column, row);
 
-                console.log(colors.green(`downPoints := ${JSON.stringify(downPoints)}`));
-
-                var values = getPointsValue(downPoints);
-
-                console.log(`${values} | Product := ${common.productOfArray(values)}`);
-
+                determineIfMax(downPoints);
             }
         }
+
+        console.log(colors.green(`Max Product is ${maxProduct}`));
     }
 };
