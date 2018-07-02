@@ -31,7 +31,7 @@
 var common = require("./common");
 const fs = require('fs');
 const util = require('util');
-var colors = require('colors/safe'); 
+var colors = require('colors/safe');
 
 // Convert fs.readFile into Promise version of same    
 const readFile = util.promisify(fs.readFile);
@@ -55,6 +55,10 @@ function getPointValue(column, row) {
 
 function findDiagonalPoints(x, y) {
     var points = [];
+
+    console.log(`(${x}, ${y}) | x + 4 = ${x + 4} | y + 4 = ${y + 4} | maxColumns = ${maxColumns}`);
+
+    if(x + 4 > maxColumns || y + 4 > maxRows) return points;
 
     for (var i = 0; i < 4; i++) {
         points.push({
@@ -87,11 +91,10 @@ module.exports = {
         for (var row = 0; row < maxRows; row++) {
             for (var column = 0; column < maxColumns; column++) {
                 console.log(colors.magenta(`Examing Point (${column}, ${row})`));
-                
 
-                var diagonalPoints = findDiagonalPoints(row, column);
+                var diagonalPoints = findDiagonalPoints(column, row);
 
-                console.log(`diagonalPoints := ${JSON.stringify(diagonalPoints)}`);
+                console.log(colors.green(`diagonalPoints := ${JSON.stringify(diagonalPoints)}`));
 
                 var values = [];
 
@@ -103,7 +106,7 @@ module.exports = {
 
                 console.log(`${values}`);
 
-                if (loops > maxRows) return;
+                //if (loops > maxRows) return;
 
                 loops++;
             }
