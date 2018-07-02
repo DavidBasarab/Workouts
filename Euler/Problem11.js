@@ -42,16 +42,12 @@ async function getData() {
 }
 
 function getPoint(column, row) {
-    console.log(`getPoint(${column}, ${row})`);
-    
+    //console.log(`getPoint(${column}, ${row})`);
+
     var line = grid[row];
     var columns = line.split(" ");
 
-    console.log(line);
-
     var columnValue = columns[column];
-
-    console.log(`Column Value = ${columnValue}`);
 
     return parseInt(columnValue);
 }
@@ -64,8 +60,9 @@ module.exports = {
 
         console.log(`Number of Lines = ${grid.length}`);
 
-        var value = getPoint(8, 6);
-
-        console.log(`Value at (8, 6) := ${value}`);
+        console.log(`Value at (8, 6) := ${getPoint(8, 6)}`);
+        console.log(`Value at (9, 7) := ${getPoint(9, 7)}`);
+        console.log(`Value at (10, 8) := ${getPoint(10, 8)}`);
+        console.log(`Value at (11, 9) := ${getPoint(11, 9)}`);
     }
 };
