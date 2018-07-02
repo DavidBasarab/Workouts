@@ -29,13 +29,16 @@
 */
 
 var common = require("./common");
+var colors = require('colors/safe');
+
 const fs = require('fs');
 const util = require('util');
-var colors = require('colors/safe');
 
 // Convert fs.readFile into Promise version of same    
 const readFile = util.promisify(fs.readFile);
 
+var maxRows = 20;
+var maxColumns = 20;
 var grid;
 
 async function getData() {
@@ -53,12 +56,24 @@ function getPointValue(column, row) {
     return parseInt(columnValue);
 }
 
+function getPointsValue(points) {
+    var values = [];
+
+    points.forEach(function (point) {
+        var value = getPointValue(point.x, point.y);
+
+        values.push(value);
+    });
+
+    return values;
+}
+
 function findDiagonalPoints(x, y) {
     var points = [];
 
-    console.log(`(${x}, ${y}) | x + 4 = ${x + 4} | y + 4 = ${y + 4} | maxColumns = ${maxColumns}`);
+    //console.log(`(${x}, ${y}) | x + 4 = ${x + 4} | y + 4 = ${y + 4} | maxColumns = ${maxColumns}`);
 
-    if(x + 4 > maxColumns || y + 4 > maxRows) return points;
+    if (x + 4 > maxColumns || y + 4 > maxRows) return points;
 
     for (var i = 0; i < 4; i++) {
         points.push({
@@ -70,8 +85,20 @@ function findDiagonalPoints(x, y) {
     return points;
 }
 
-var maxRows = 20;
-var maxColumns = 20;
+function findRightPoints(x, y) {
+    var points = [];
+
+    if (x + 4 > maxColumns) return points;
+
+    for (var i = 0; i < 4; i++) {
+        points.push({
+            x: x + i,
+            y: y
+        });
+    }
+
+    return points;
+}
 
 module.exports = {
     solveProblem: async function () {
@@ -93,18 +120,12 @@ module.exports = {
                 console.log(colors.magenta(`Examing Point (${column}, ${row})`));
 
                 var diagonalPoints = findDiagonalPoints(column, row);
+                //console.log(colors.green(`diagonalPoints := ${JSON.stringify(diagonalPoints)}`));
 
-                console.log(colors.green(`diagonalPoints := ${JSON.stringify(diagonalPoints)}`));
+                var rightPoints = findRightPoints(column, row);
+                console.log(colors.green(`rightPoints := ${JSON.stringify(rightPoints)}`));
 
-                var values = [];
-
-                diagonalPoints.forEach(function (point) {
-                    var value = getPointValue(point.x, point.y);
-
-                    values.push(value);
-                });
-
-                console.log(`${values}`);
+                console.log(`${getPointsValue(rightPoints)}`);
 
                 //if (loops > maxRows) return;
 
