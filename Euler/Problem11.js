@@ -69,7 +69,7 @@ function getPointsValue(points) {
     return values;
 }
 
-function findDiagonalPoints(x, y) {
+function findDiagonalToBottomRightPoints(x, y) {
     var points = [];
 
     if (x + 4 > maxColumns || y + 4 > maxRows) return points;
@@ -84,6 +84,37 @@ function findDiagonalPoints(x, y) {
     return points;
 }
 
+function findDiagonalToUpperLeftPoints(x, y) {
+    var points = [];
+
+    if (x - 4 < 0 || y - 4 < 0) return points;
+
+    for (var i = 0; i < 4; i++) {
+        points.push({
+            x: x - i,
+            y: y - i
+        });
+    }
+
+    return points;
+}
+
+function findDiagonalToBottomLeftPoints(x, y) {
+    var points = [];
+
+    if (x - 4 < 0 || y + 4 > maxRows) return points;
+
+    for (var i = 0; i < 4; i++) {
+        points.push({
+            x: x - i,
+            y: y + i
+        });
+    }
+
+    return points;
+}
+
+
 function findRightPoints(x, y) {
     var points = [];
 
@@ -92,6 +123,21 @@ function findRightPoints(x, y) {
     for (var i = 0; i < 4; i++) {
         points.push({
             x: x + i,
+            y: y
+        });
+    }
+
+    return points;
+}
+
+function findLeftPoints(x, y) {
+    var points = [];
+
+    if (x - 4 < 0) return points;
+
+    for (var i = 0; i < 4; i++) {
+        points.push({
+            x: x - i,
             y: y
         });
     }
@@ -114,7 +160,22 @@ function findDownPoints(x, y) {
     return points;
 }
 
-function determineIfMax(points) {
+function findUpPoints(x, y) {
+    var points = [];
+
+    if (y - 4 < 0) return points;
+
+    for (var i = 0; i < 4; i++) {
+        points.push({
+            x: x,
+            y: y - i
+        });
+    }
+
+    return points;
+}
+
+function determineIfMax(label, points) {
     var values = getPointsValue(points);
 
     var product = common.productOfArray(values);
@@ -122,7 +183,7 @@ function determineIfMax(points) {
     if (product > maxProduct) {
         maxProduct = product;
 
-        console.log(colors.yellow(`${JSON.stringify(points)} | ${values} with a product of ${product} is now the max value.`));
+        console.log(colors.yellow(`${JSON.stringify(points)} | for ${label} | ${values} with a product of ${product} is now the max value.`));
     }
 }
 
@@ -137,18 +198,34 @@ module.exports = {
         for (var row = 0; row < maxRows; row++) {
             for (var column = 0; column < maxColumns; column++) {
                 //console.log(colors.magenta(`Examing Point (${column}, ${row})`));
+                
+                var upPoints = findUpPoints(column, row);
 
-                var diagonalPoints = findDiagonalPoints(column, row);
+                determineIfMax("up", upPoints);
 
-                determineIfMax(diagonalPoints);
+                var leftPoints = findLeftPoints(column, row);
+
+                determineIfMax("left", leftPoints);
+
+                var diagonalBottomRightPoints = findDiagonalToBottomRightPoints(column, row);
+
+                determineIfMax("diagonalBottomRight", diagonalBottomRightPoints);
+
+                var diagonalUpperLeftPoints = findDiagonalToUpperLeftPoints(column, row);
+
+                determineIfMax("diagonalUpperLeft", diagonalUpperLeftPoints);
+
+                var diagonalBottomLeftPoints = findDiagonalToBottomLeftPoints(column, row);
+
+                determineIfMax("diagonalBottomLeft", diagonalBottomLeftPoints);
 
                 var rightPoints = findRightPoints(column, row);
 
-                determineIfMax(rightPoints);
+                determineIfMax("right", rightPoints);
 
                 var downPoints = findDownPoints(column, row);
 
-                determineIfMax(downPoints);
+                determineIfMax("down", downPoints);
             }
         }
 

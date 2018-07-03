@@ -16,4 +16,6 @@ var solver = require(`./${requiredFile}`);
 
 solver.solveProblem().then(function () {
     console.timeEnd(timeLabel);
+}).catch(error => {
+    console.error(error);
 });
