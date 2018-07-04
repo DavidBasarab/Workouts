@@ -1,24 +1,6 @@
 var primes = null;
 
-function getArrayCombinations(array) {
-    var result = [];
 
-    var internalCombiner = function (prefix, current) {
-        for (var i = 0; i < current.length; i++) {
-            var tempArray = prefix.concat(current[i]);
-
-            var product = common.productOfArray(tempArray);
-
-            if (!result.includes(product)) result.push(product);
-
-            internalCombiner(prefix.concat(current[i]), current.slice(i + 1));
-        }
-    }
-
-    internalCombiner([], array);
-
-    return result;
-}
 
 module.exports = {
     isMultipleOf: function (value, multipleNumber) {
@@ -110,15 +92,13 @@ module.exports = {
         return factors;
     },
     getFactors: function (number) {
-        var primeFactors = getPrimeFactors(number).sort((a, b) => a - b);
+        var primeFactors = this.getPrimeFactors(number).sort((a, b) => a - b);
 
-        var factors = getArrayCombinations(primeFactors);
+        var factors = this.getArrayProductCombinations(primeFactors);
 
         factors.push(1);
 
         factors.sort((a, b) => a - b);
-
-        console.log(colors.green(`result := ${factors}`));
 
         return factors;
     },
@@ -126,5 +106,24 @@ module.exports = {
         this.getPrimes();
 
         return this;
+    },
+    getArrayProductCombinations : function(array) {
+        var result = [];
+    
+        var internalCombiner = function (prefix, current, productOfArray) {
+            for (var i = 0; i < current.length; i++) {
+                var tempArray = prefix.concat(current[i]);
+    
+                var product = productOfArray(tempArray);
+    
+                if (!result.includes(product)) result.push(product);
+    
+                internalCombiner(prefix.concat(current[i]), current.slice(i + 1), productOfArray);
+            }
+        }
+    
+        internalCombiner([], array, this.productOfArray);
+    
+        return result;
     }
 }.runOnLoad();

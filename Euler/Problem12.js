@@ -28,6 +28,6 @@ module.exports = {
 
         var number = 55;
 
-        console.log(`Factors for ${number} are ${common.findFactors(number)}`);
+        console.log(`Factors for ${number} are ${common.getFactors(number)}`);
     }
 }
