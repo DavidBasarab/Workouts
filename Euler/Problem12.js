@@ -23,71 +23,45 @@
 var common = require("./common");
 var colors = require('colors/safe');
 
-function findCombination(array) {
+function getArrayCombinations(array) {
+    var result = [];
 
-    // console.log(`Finding Combinations of ${array}`);
+    var internalCombiner = function(prefix, current) {
+        for(var i = 0; i < current.length; i++) {
+            var tempArray = prefix.concat(current[i]);
 
-    var first = array[0];
+            var product = common.productOfArray(tempArray);
 
-    array.splice(0, 1);
+            if(!result.includes(product)) result.push(product);
 
-    // console.log(`First Item = ${first} | splice := ${array}`);
-
-    var combos = [];
-
-    for (var i = 0; i < array.length; i++) {
-        var value = first * array[i]
-
-        // console.log(colors.green(`Adding to combos ${first} * ${array[i]} := ${value}`));
-
-        combos.push(value);
+            internalCombiner(prefix.concat(current[i]), current.slice(i + 1));
+        }
     }
 
-    // console.log(colors.cyan(`Combos before Recursive ${combos}`));
+    internalCombiner([], array);
 
-    if (array.length > 1) {
-        var recursiveCall = findCombination(array);
+    return result;
+}
 
-        // console.log(colors.yellow(`recursiveCall = ${recursiveCall} | combo := ${combos}`));
+function findFactors(number) {
+    var primeFactors = common.getPrimeFactors(number).sort((a, b) => a - b);
 
-        combos = combos.concat(recursiveCall);
-    }
+    var factors = getArrayCombinations(primeFactors);
 
-    // console.log(`Returing combination ${combos}`);
+    factors.push(1);
 
-    return combos;
+    factors.sort((a, b) => a - b);
 
+    console.log(colors.green(`result := ${factors}`));
+
+    return factors;
 }
 
 module.exports = {
     solveProblem: async function () {
 
-        var number = 18;
+        var number = 55;
 
-        var primeFactors = common.getPrimeFactors(number);
-
-
-
-        var factors = [];
-
-        factors.push(1);
-        factors.push(number);
-
-        var primeCobinations = findCombination(primeFactors.slice());
-
-        primeFactors.forEach(element => {
-            if (!factors.includes(element)) factors.push(element);
-        });
-
-        primeCobinations.forEach(element => {
-            if (!factors.includes(element)) factors.push(element);
-        });
-
-        factors = factors.sort((a, b) => a - b);
-
-        console.log(`PrimeFactors for ${number} is ${primeFactors}`);
-        console.log(`PrimeCombinations := ${primeCobinations}`);
-        console.log(`Factors for ${number} are ${factors}`);
-
+        console.log(`Factors for ${number} are ${findFactors(number)}`);
     }
 }
