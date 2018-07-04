@@ -1,5 +1,25 @@
 var primes = null;
 
+function getArrayCombinations(array) {
+    var result = [];
+
+    var internalCombiner = function (prefix, current) {
+        for (var i = 0; i < current.length; i++) {
+            var tempArray = prefix.concat(current[i]);
+
+            var product = common.productOfArray(tempArray);
+
+            if (!result.includes(product)) result.push(product);
+
+            internalCombiner(prefix.concat(current[i]), current.slice(i + 1));
+        }
+    }
+
+    internalCombiner([], array);
+
+    return result;
+}
+
 module.exports = {
     isMultipleOf: function (value, multipleNumber) {
         return value % multipleNumber == 0;
@@ -38,7 +58,7 @@ module.exports = {
 
         return sum;
     },
-    productOfArray : function(array) {
+    productOfArray: function (array) {
         var product = 1;
 
         array.forEach(value => product *= value);
@@ -86,6 +106,19 @@ module.exports = {
                 break;
             }
         }
+
+        return factors;
+    },
+    getFactors: function (number) {
+        var primeFactors = getPrimeFactors(number).sort((a, b) => a - b);
+
+        var factors = getArrayCombinations(primeFactors);
+
+        factors.push(1);
+
+        factors.sort((a, b) => a - b);
+
+        console.log(colors.green(`result := ${factors}`));
 
         return factors;
     },
