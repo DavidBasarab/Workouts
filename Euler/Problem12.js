@@ -23,11 +23,98 @@
 var common = require("./common");
 var colors = require('colors/safe');
 
+function findTriangles(number = 500000) {
+
+    var triangles = [];
+    var lastValue = 0;
+
+    for (i = 1; i < number + 1; i++) {
+        var currentValue = i + lastValue;
+
+        triangles.push(currentValue);
+
+        lastValue = currentValue;
+    }
+
+    return triangles;
+
+}
+
+function getPrimeExpontentCount(array) {
+    var tracker = [];
+
+    function getFromTracker(number) {
+        tracker.forEach(element => {
+            if (element.number == number) return element;
+        });
+
+        return null;
+    }
+
+    for (var i = 0; i < array.length; i++) {
+        var current = array[i];
+
+        var element = getFromTracker(current);
+
+        if (element != null) {
+            element.count++;
+        } else {
+            tracker.push({
+                count: 1,
+                number: current
+            });
+        }
+    }
+
+    var exponents = [];
+
+    tracker.forEach(element => {
+        exponents.push(element.count);
+    });
+
+    return exponents;
+}
+
 module.exports = {
     solveProblem: async function () {
 
-        var number = 55;
+        // console.log('Finding Triangles');
 
-        console.log(`Factors for ${number} are ${common.getFactors(number)}`);
+        // var triangles = findTriangles();
+
+        // console.log('Done finding Triangles');
+        // console.log('Looking for 500 factors.');
+
+        var number = 7540;
+
+        var primeFactors = common.getPrimeFactors(number);
+
+        console.log(`PrimeFactors ${primeFactors}`);
+
+        var occurances = getPrimeExpontentCount(primeFactors);
+
+        for (var i = 0; i < occurances.length; i++) {
+            occurances[i]++;
+        }
+
+        var factors = common.getFactors(number);
+
+        console.log(`For ${primeFactors} has occurances ${occurances} and has ${common.productOfArray(occurances)} factors form common ${factors.length}`);
+
+        // for (var i = 100000; i < triangles.length; i++) {
+        //     var current = triangles[i];
+
+        //     var factors = common.getFactors(current);
+
+        //     //console.log(`Triangle ${current} has ${factors.length} factors`);
+
+        //     if (factors.length == 499) {
+        //         console.log(`Triangle ${current} has ${factors.length} factors`);
+
+        //         console.log("Exiting . . .");
+
+        //         return;
+        //     }
+        // }
     }
 }
