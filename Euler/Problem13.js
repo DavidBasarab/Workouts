@@ -106,6 +106,7 @@
 */
 
 var common = require("./common");
+var colors = require('colors/safe');
 
 const fs = require('fs');
 const util = require('util');
@@ -137,6 +138,9 @@ module.exports = {
             //console.log(`Adding ${number.toString()}`);
 
             sum = sum.add(number);
+
+            console.log(colors.yellow(`Sum after add ${sum.toString(10)}`));
+
         }
 
         // for(var i = 0; i < numbers.length; i++) {
@@ -149,13 +153,10 @@ module.exports = {
 
         console.log("Going to output sum");
 
-        var sumArray = sum.toArray(10);
+        var sumString = sum.toString(10);
 
-        console.log(`SumArray := ${sumArray.length}`);
-        
+        console.log(`sumString.Length := ${sumString.length}`);
+        console.log(sumString);
 
-        for(var i = 0; i < sumArray.length; i++) {
-            console.log(sumArray[i]);
-        }
     }
 }
