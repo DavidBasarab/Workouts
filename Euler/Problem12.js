@@ -23,7 +23,7 @@
 var common = require("./common");
 var colors = require('colors/safe');
 
-function findTriangles(number = 500000) {
+function findTriangles(number = 15000000) {
 
     var triangles = [];
     var lastValue = 0;
@@ -40,7 +40,7 @@ function findTriangles(number = 500000) {
 
 }
 
-function getPrimeExpontentCount(array) {
+function findOccurancesOfNumbersInArray(array) {
     var tracker = [];
 
     function getFromTracker(number) {
@@ -69,47 +69,69 @@ function getPrimeExpontentCount(array) {
         }
     }
 
-    var exponents = [];
+    var occurances = [];
 
     tracker.forEach(element => {
-        exponents.push(element.count);
+        occurances.push(element.count);
     });
 
-    return exponents;
+    return occurances;
+}
+
+function countFactorsForNumber(number) {
+
+    var primeFactors = common.getPrimeFactors(number);
+
+    //console.log(`PrimeFactors ${primeFactors}`);
+
+    var occurances = findOccurancesOfNumbersInArray(primeFactors);
+
+    for (var i = 0; i < occurances.length; i++) {
+        occurances[i]++;
+    }
+
+    var productOfOccurances = common.productOfArray(occurances);
+
+    //console.log(`For ${number} has ${productOfOccurances} factors`);
+
+    return productOfOccurances;
 }
 
 module.exports = {
     solveProblem: async function () {
 
-        // console.log('Finding Triangles');
+        console.log('Finding Triangles');
 
-        // var triangles = findTriangles();
+        var triangles = findTriangles();
 
-        // console.log('Done finding Triangles');
-        // console.log('Looking for 500 factors.');
+        console.log(`Done finding Triangles := ${triangles.length}`);
 
-        var number = 15802;
+        var loops = 0;
 
-        var primeFactors = common.getPrimeFactors(number);
+        for (var i = triangles.length - 1; i > -1; i--) {
+            loops++;
 
-        console.log(`PrimeFactors ${primeFactors}`);
+            var current = triangles[i];
 
-        var occurances = getPrimeExpontentCount(primeFactors);
+            var factorCount = countFactorsForNumber(current);
 
-        for (var i = 0; i < occurances.length; i++) {
-            occurances[i]++;
+            if(factorCount == 500) {
+                console.log(colors.green(`Found ${current} has ${factorCount} factors`));
+
+                return;
+            }
+
+            if (loops % 1000 == 0) {
+                //console.log(`Ran ${loops} loops.  Exiting. . . .`);
+                console.log(`Done with loop ${loops}`);
+            }
+
         }
-
-        var factors = common.getFactors(number);
-
-        console.log(`For ${primeFactors} has occurances ${occurances} and has ${common.productOfArray(occurances)} factors form common ${factors.length}`);
 
         // for (var i = 100000; i < triangles.length; i++) {
         //     var current = triangles[i];
 
-        //     var factors = common.getFactors(current);
-
-        //     //console.log(`Triangle ${current} has ${factors.length} factors`);
+        //     //var factors = common.getFactors(current);
 
         //     if (factors.length == 499) {
         //         console.log(`Triangle ${current} has ${factors.length} factors`);
