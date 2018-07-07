@@ -22,10 +22,15 @@ var common = require("./common");
 
 module.exports = {
     solveProblem: async function () {
-        var value = common.factorial(14);
+        var number = 20;
 
-        console.log(`For 14 the factorial value is ${value}`);
-        
+        var top = common.factorial(2 * number);
+
+        var bottom = Math.pow(common.factorial(number), 2);
+
+        var paths = top / bottom;
+
+        console.log(`For Grid size of ${number} there are ${paths} paths.`);
     }
 }
 
