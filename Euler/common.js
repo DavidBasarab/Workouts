@@ -6,6 +6,11 @@ module.exports = {
     isMultipleOf: function (value, multipleNumber) {
         return value % multipleNumber == 0;
     },
+    factorial : function(number) {
+        if(number === 0) return 1;
+
+        return number * this.factorial(number -1);
+    },
     isEven: function (value) {
         return this.isMultipleOf(value, 2);
     },

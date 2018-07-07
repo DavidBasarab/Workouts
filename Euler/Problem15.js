@@ -22,6 +22,9 @@ var common = require("./common");
 
 module.exports = {
     solveProblem: async function () {
+        var value = common.factorial(14);
+
+        console.log(`For 14 the factorial value is ${value}`);
         
     }
 }
