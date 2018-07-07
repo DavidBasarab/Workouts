@@ -44,20 +44,23 @@ function getPrimeExpontentCount(array) {
     var tracker = [];
 
     function getFromTracker(number) {
-        tracker.forEach(element => {
-            if (element.number == number) return element;
+
+        var foundIdex = -1;
+
+        tracker.forEach((element, index) => {
+            if (element.number == number) foundIdex = index;
         });
 
-        return null;
+        return foundIdex;
     }
 
     for (var i = 0; i < array.length; i++) {
         var current = array[i];
 
-        var element = getFromTracker(current);
+        var foundIndex = getFromTracker(current);
 
-        if (element != null) {
-            element.count++;
+        if (foundIndex != -1) {
+            tracker[foundIndex].count++;
         } else {
             tracker.push({
                 count: 1,
@@ -85,7 +88,7 @@ module.exports = {
         // console.log('Done finding Triangles');
         // console.log('Looking for 500 factors.');
 
-        var number = 7540;
+        var number = 15802;
 
         var primeFactors = common.getPrimeFactors(number);
 
