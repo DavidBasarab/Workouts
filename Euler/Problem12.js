@@ -108,10 +108,10 @@ module.exports = {
         console.log(`Done finding Triangles := ${triangles.length}`);
 
         var progressBar = new _progress.Bar({
-            barCompleteChar: '+',
-            barIncompleteChar: ' ',
-            fps: 5,
-            stream: process.stdout,
+            // barCompleteChar: '+',
+            // barIncompleteChar: ' ',
+            // fps: 5,
+            // stream: process.stdout,
             barsize: 65
         }, _progress.Presets.shades_grey);
 
