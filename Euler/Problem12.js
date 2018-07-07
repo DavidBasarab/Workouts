@@ -113,7 +113,7 @@ module.exports = {
             fps: 5,
             stream: process.stdout,
             barsize: 65
-        });
+        }, _progress.Presets.shades_grey);
 
         progressBar.start(triangles.length, 0);
 
