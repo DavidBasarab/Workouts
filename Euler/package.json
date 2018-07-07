@@ -4,7 +4,9 @@
   "description": "For me working on project Euler problems",
   "main": "main.js",
   "dependencies": {
-    "colors": "^1.3.0"
+    "cli-progress": "^2.0.0",
+    "colors": "^1.3.0",
+    "progress": "^2.0.0"
   },
   "devDependencies": {},
   "scripts": {
