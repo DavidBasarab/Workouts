@@ -24,7 +24,7 @@ var common = require("./common");
 var colors = require('colors/safe');
 const _progress = require('cli-progress');
 
-function findTriangles(number = 500000) {
+function findTriangles(number = 50000000) {
 
     var triangles = [];
     var lastValue = 0;
@@ -119,17 +119,19 @@ module.exports = {
 
         var loops = 0;
 
-        for (var i = triangles.length - 1; i > -1; i--) {
+        //for (var i = triangles.length - 1; i > -1; i--) {
+        for (var i = 0; i < triangles.length; i++) {
             loops++;
 
             var current = triangles[i];
 
             var factorCount = countFactorsForNumber(current);
 
-            if (factorCount == 500) {
-                console.log(colors.green(`Found ${current} has ${factorCount} factors`));
-
+            if (factorCount >= 500) {
+                progressBar.update(triangles.length);
                 progressBar.stop();
+
+                console.log(colors.green(`Found ${current} has ${factorCount} factors`));
 
                 return;
             }
