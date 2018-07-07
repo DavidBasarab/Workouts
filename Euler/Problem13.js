@@ -121,10 +121,16 @@ module.exports = {
     solveProblem: async function () {
         var data = await getData();
 
-        var numbers = data.toString().split("\n");
+        var lines = data.toString().split("\n");
 
-        numbers.forEach(line => {
-            console.log(line);
+        var numbers = [];
+
+        lines.forEach(line => {
+            numbers.push(parseFloat(line));
         });
+
+        var sum = common.sumArray(numbers);
+
+        console.log(JSON.stringify(sum));
     }
 }
