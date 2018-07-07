@@ -113,6 +113,8 @@ const util = require('util');
 // Convert fs.readFile into Promise version of same    
 const readFile = util.promisify(fs.readFile);
 
+var bigInt = require("big-integer");
+
 async function getData() {
     return await readFile("./Problem13Data.txt");
 }
@@ -123,14 +125,37 @@ module.exports = {
 
         var lines = data.toString().split("\n");
 
-        var numbers = [];
+        var sum = bigInt(0);
 
-        lines.forEach(line => {
-            numbers.push(parseFloat(line));
-        });
+        for (var i = 0; i < lines.length; i++) {
+            var currentLine = lines[i].trim();
 
-        var sum = common.sumArray(numbers);
+            //console.log(`CurrentLine := ${currentLine}`);
 
-        console.log(JSON.stringify(sum));
+            var number = bigInt(currentLine);
+
+            //console.log(`Adding ${number.toString()}`);
+
+            sum = sum.add(number);
+        }
+
+        // for(var i = 0; i < numbers.length; i++) {
+        //     var current = numbers[i];
+
+        //     console.log(current.toString());
+
+        //     sum.add(current);
+        // }
+
+        console.log("Going to output sum");
+
+        var sumArray = sum.toArray(10);
+
+        console.log(`SumArray := ${sumArray.length}`);
+        
+
+        for(var i = 0; i < sumArray.length; i++) {
+            console.log(sumArray[i]);
+        }
     }
 }
