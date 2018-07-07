@@ -131,25 +131,13 @@ module.exports = {
         for (var i = 0; i < lines.length; i++) {
             var currentLine = lines[i].trim();
 
-            //console.log(`CurrentLine := ${currentLine}`);
-
             var number = bigInt(currentLine);
-
-            //console.log(`Adding ${number.toString()}`);
 
             sum = sum.add(number);
 
             console.log(colors.yellow(`Sum after add ${sum.toString(10)}`));
 
         }
-
-        // for(var i = 0; i < numbers.length; i++) {
-        //     var current = numbers[i];
-
-        //     console.log(current.toString());
-
-        //     sum.add(current);
-        // }
 
         console.log("Going to output sum");
 
