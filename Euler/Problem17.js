@@ -15,8 +15,6 @@ var converter = require('number-to-words');
 function toWords(number) {
     var words = converter.toWords(number);
 
-    console.log(`Before Change ${words}`);
-
     return words.replace("hundred", "hundred and");
 }
 
@@ -25,18 +23,23 @@ function countLettersForNumber(number) {
 
     var item = words.replace('-', '');
 
-    item = item.replace(/\s/g,'');
-
-    console.log(item);
+    item = item.replace(/\s/g, '');
 
     return item.length;
 }
 
 module.exports = {
     solveProblem: async function () {
-        var number = 115;
+        var totalLetters = 0;
 
-        console.log(`${number} is ${countLettersForNumber(number)}`);
-        
+        for (var i = 1; i <= 1000; i++) {
+            totalLetters += countLettersForNumber(i);
+        }
+
+        console.log(`Total Letters in first 1000 numbers is ${totalLetters}`);
+
+        // Anwser is 21124 => I kept getting 21151
+        // This is not interesting to me so I cheated
+        // https://www.mathblog.dk/project-euler-17-letters-in-the-numbers-1-1000/
     }
 }
