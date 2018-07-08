@@ -10,12 +10,33 @@
 */
 
 var common = require("./common");
+var converter = require('number-to-words');
+
+function toWords(number) {
+    var words = converter.toWords(number);
+
+    console.log(`Before Change ${words}`);
+
+    return words.replace("hundred", "hundred and");
+}
+
+function countLettersForNumber(number) {
+    var words = toWords(number);
+
+    var item = words.replace('-', '');
+
+    item = item.replace(/\s/g,'');
+
+    console.log(item);
+
+    return item.length;
+}
 
 module.exports = {
     solveProblem: async function () {
-        var number = 342;
+        var number = 115;
 
-        console.log(`${number} is ${number.toLocaleString("en-GB")}`);
+        console.log(`${number} is ${countLettersForNumber(number)}`);
         
     }
 }
