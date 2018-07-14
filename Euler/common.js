@@ -1,15 +1,13 @@
 var primes = null;
 
-
-
 module.exports = {
     isMultipleOf: function (value, multipleNumber) {
         return value % multipleNumber == 0;
     },
-    factorial : function(number) {
-        if(number === 0) return 1;
+    factorial: function (number) {
+        if (number === 0) return 1;
 
-        return number * this.factorial(number -1);
+        return number * this.factorial(number - 1);
     },
     isEven: function (value) {
         return this.isMultipleOf(value, 2);
@@ -57,7 +55,8 @@ module.exports = {
         console.log(`Calculating all the primes up to ${max}`);
 
         var primeArray = [];
-        var sieve = [], i, j = [];
+        var sieve = [],
+            i, j = [];
 
         for (i = 2; i <= max; ++i) {
             if (!sieve[i]) {
@@ -112,23 +111,23 @@ module.exports = {
 
         return this;
     },
-    getArrayProductCombinations : function(array) {
+    getArrayProductCombinations: function (array) {
         var result = [];
-    
+
         var internalCombiner = function (prefix, current, productOfArray) {
             for (var i = 0; i < current.length; i++) {
                 var tempArray = prefix.concat(current[i]);
-    
+
                 var product = productOfArray(tempArray);
-    
+
                 if (!result.includes(product)) result.push(product);
-    
+
                 internalCombiner(prefix.concat(current[i]), current.slice(i + 1), productOfArray);
             }
         }
-    
+
         internalCombiner([], array, this.productOfArray);
-    
+
         return result;
     }
 }.runOnLoad();
