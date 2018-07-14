@@ -12,4 +12,12 @@ Node.prototype.addRight = function (value) {
     this.right = new Node(value);
 }
 
+Node.prototype.sumLeft = function (value) {
+
+}
+
+Node.prototype.sumRight = function(value) {
+    
+}
+
 module.exports = Node;
