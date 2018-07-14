@@ -62,18 +62,34 @@ module.exports = {
         var dataArray = [];
 
         for (var i = 0; i < lines.length; i++) {
-            dataArray.push(lines[i].split(' '));
+            dataArray.push(lines[i].trim().split(' '));
         }
 
-        dataArray.forEach((element, index) => {
-            console.log(`[${index}] := ${element}`);
-        });
+        // dataArray.forEach((element, index) => {
+        //     console.log(`[${index}] := ${element}`);
+        // });
 
-        var mainNode = new Node(21);
+        function addChildren(node, row, column) {
 
-        mainNode.addLeft(13);
-        mainNode.addRight(14);
+            console.log(`addingChildren to node row := ${row} | column := ${column}`);
 
-        console.log(`mainNode := ${JSON.stringify(mainNode)}`);
+            var nextRow = row + 1;
+
+            if (nextRow >= dataArray.length) return;
+
+            var nextRowData = dataArray[nextRow];
+
+            node.addLeft(nextRowData[column]);
+            node.addRight(nextRowData[column + 1]);
+
+            addChildren(node.left, row + 1, column);
+            addChildren(node.right, row + 1, column + 1);
+        }
+
+        var topNode = new Node(dataArray[0][0]);
+
+        addChildren(topNode, 0, 0);
+
+        console.log(`${JSON.stringify(topNode, null, '    ')}`);
     }
 }
