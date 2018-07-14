@@ -58,7 +58,7 @@ async function populateDataArray() {
 }
 
 function addChildren(node, row, column) {
-  console.log(`addingChildren to node row := ${row} | column := ${column}`);
+  //console.log(`addingChildren to node row := ${row} | column := ${column}`);
 
   var nextRow = row + 1;
 
@@ -78,6 +78,8 @@ module.exports = {
     await populateDataArray();
 
     var topNode = new Node(dataArray[0][0]);
+
+    console.log("Loading Tree");
 
     addChildren(topNode, 0, 0);
 
