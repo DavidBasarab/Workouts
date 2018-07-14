@@ -50,7 +50,7 @@ module.exports = {
             TODO
 
             1) Need to create a tree from given data
-            2) Travese the tree only taking the "greater nodes"
+            2) Traverse the tree only taking the "greater nodes"
             3) Sum the values of the nodes
         */
 
