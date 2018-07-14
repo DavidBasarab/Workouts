@@ -45,39 +45,39 @@ async function getData() {
     return await readFile("./Problem18Data.txt");
 }
 
+var dataArray = [];
+
+async function populateDataArray() {
+    var data = await getData();
+
+    var lines = data.toString().split("\n");
+
+
+
+    for (var i = 0; i < lines.length; i++) {
+        dataArray.push(lines[i].trim().split(' '));
+    }
+}
+
+function addChildren(node, row, column) {
+
+    console.log(`addingChildren to node row := ${row} | column := ${column}`);
+
+    var nextRow = row + 1;
+
+    if (nextRow >= dataArray.length) return;
+
+    var nextRowData = dataArray[nextRow];
+
+    node.addLeft(nextRowData[column]);
+    node.addRight(nextRowData[column + 1]);
+
+    addChildren(node.left, row + 1, column);
+    addChildren(node.right, row + 1, column + 1);
+}
+
 module.exports = {
     solveProblem: async function () {
-
-        var dataArray = [];
-
-        async function populateDataArray() {
-            var data = await getData();
-
-            var lines = data.toString().split("\n");
-
-
-
-            for (var i = 0; i < lines.length; i++) {
-                dataArray.push(lines[i].trim().split(' '));
-            }
-        }
-
-        function addChildren(node, row, column) {
-
-            console.log(`addingChildren to node row := ${row} | column := ${column}`);
-
-            var nextRow = row + 1;
-
-            if (nextRow >= dataArray.length) return;
-
-            var nextRowData = dataArray[nextRow];
-
-            node.addLeft(nextRowData[column]);
-            node.addRight(nextRowData[column + 1]);
-
-            addChildren(node.left, row + 1, column);
-            addChildren(node.right, row + 1, column + 1);
-        }
 
         await populateDataArray();
 
