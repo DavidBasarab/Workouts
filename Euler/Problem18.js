@@ -59,9 +59,15 @@ module.exports = {
 
         var lines = data.toString().split("\n");
 
-        // for (var i = 0; i < lines.length; i++) {
-        //     console.log(lines[i]);
-        // }
+        var dataArray = [];
+
+        for (var i = 0; i < lines.length; i++) {
+            dataArray.push(lines[i].split(' '));
+        }
+
+        dataArray.forEach((element, index) => {
+            console.log(`[${index}] := ${element}`);
+        });
 
         var mainNode = new Node(21);
 
