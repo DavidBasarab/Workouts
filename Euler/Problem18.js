@@ -47,15 +47,19 @@ async function getData() {
 
 module.exports = {
     solveProblem: async function () {
-        
-        var data = await getData();
-
-        var lines = data.toString().split("\n");
 
         var dataArray = [];
 
-        for (var i = 0; i < lines.length; i++) {
-            dataArray.push(lines[i].trim().split(' '));
+        async function populateDataArray() {
+            var data = await getData();
+
+            var lines = data.toString().split("\n");
+
+
+
+            for (var i = 0; i < lines.length; i++) {
+                dataArray.push(lines[i].trim().split(' '));
+            }
         }
 
         function addChildren(node, row, column) {
@@ -74,6 +78,8 @@ module.exports = {
             addChildren(node.left, row + 1, column);
             addChildren(node.right, row + 1, column + 1);
         }
+
+        await populateDataArray();
 
         var topNode = new Node(dataArray[0][0]);
 
