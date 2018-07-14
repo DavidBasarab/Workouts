@@ -81,10 +81,10 @@ module.exports = {
 
     addChildren(topNode, 0, 0);
 
-    console.log(`${JSON.stringify(topNode, null, "    ")}`);
+    //console.log(`${JSON.stringify(topNode, null, "    ")}`);
 
     var largestSum = topNode.findLargestSum();
 
-    console.log(`TopNode LargestSum := ${largestSum}`);
+    console.log(`Tree Largest Sum is '${largestSum}'`);
   }
 };

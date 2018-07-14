@@ -33,7 +33,7 @@ Node.prototype.findLargestSum = function () {
     finalSum += rightSum;
   }
 
-  console.log(`Finding Largest Sum for ${this.value} | LeftValue := ${this.left == null ? 0 : this.left.value} | RightValue := ${this.right == null ? 0 : this.right.value} | FinalSum := ${finalSum}`);
+  //console.log(`Finding Largest Sum for ${this.value} | LeftValue := ${this.left == null ? 0 : this.left.value} | RightValue := ${this.right == null ? 0 : this.right.value} | FinalSum := ${finalSum}`);
 
   return finalSum;
 };
