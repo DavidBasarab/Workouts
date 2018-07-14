@@ -33,6 +33,7 @@ NOTE: As there are only 16384 routes, it is possible to solve this problem by tr
 */
 
 var common = require("./common");
+var Node = require("./treeNodeModule");
 
 const fs = require('fs');
 const util = require('util');
@@ -58,8 +59,15 @@ module.exports = {
 
         var lines = data.toString().split("\n");
 
-        for (var i = 0; i < lines.length; i++) {
-            console.log(lines[i]);
-        }
+        // for (var i = 0; i < lines.length; i++) {
+        //     console.log(lines[i]);
+        // }
+
+        var mainNode = new Node(21);
+
+        mainNode.addLeft(13);
+        mainNode.addRight(14);
+
+        console.log(`mainNode := ${JSON.stringify(mainNode)}`);
     }
 }
