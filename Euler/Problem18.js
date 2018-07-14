@@ -35,56 +35,56 @@ NOTE: As there are only 16384 routes, it is possible to solve this problem by tr
 var common = require("./common");
 var Node = require("./treeNodeModule");
 
-const fs = require('fs');
-const util = require('util');
+const fs = require("fs");
+const util = require("util");
 
-// Convert fs.readFile into Promise version of same    
+// Convert fs.readFile into Promise version of same
 const readFile = util.promisify(fs.readFile);
 
 async function getData() {
-    return await readFile("./Problem18Data.txt");
+  return await readFile("./Problem18Data.txt");
 }
 
 var dataArray = [];
 
 async function populateDataArray() {
-    var data = await getData();
+  var data = await getData();
 
-    var lines = data.toString().split("\n");
+  var lines = data.toString().split("\n");
 
-
-
-    for (var i = 0; i < lines.length; i++) {
-        dataArray.push(lines[i].trim().split(' '));
-    }
+  for (var i = 0; i < lines.length; i++) {
+    dataArray.push(lines[i].trim().split(" "));
+  }
 }
 
 function addChildren(node, row, column) {
+  console.log(`addingChildren to node row := ${row} | column := ${column}`);
 
-    console.log(`addingChildren to node row := ${row} | column := ${column}`);
+  var nextRow = row + 1;
 
-    var nextRow = row + 1;
+  if (nextRow >= dataArray.length) return;
 
-    if (nextRow >= dataArray.length) return;
+  var nextRowData = dataArray[nextRow];
 
-    var nextRowData = dataArray[nextRow];
+  node.addLeft(nextRowData[column]);
+  node.addRight(nextRowData[column + 1]);
 
-    node.addLeft(nextRowData[column]);
-    node.addRight(nextRowData[column + 1]);
-
-    addChildren(node.left, row + 1, column);
-    addChildren(node.right, row + 1, column + 1);
+  addChildren(node.left, row + 1, column);
+  addChildren(node.right, row + 1, column + 1);
 }
 
 module.exports = {
-    solveProblem: async function () {
+  solveProblem: async function() {
+    await populateDataArray();
 
-        await populateDataArray();
+    var topNode = new Node(dataArray[0][0]);
 
-        var topNode = new Node(dataArray[0][0]);
+    addChildren(topNode, 0, 0);
 
-        addChildren(topNode, 0, 0);
+    console.log(`${JSON.stringify(topNode, null, "    ")}`);
 
-        console.log(`${JSON.stringify(topNode, null, '    ')}`);
-    }
-}
+    var largestSum = topNode.findLargestSum();
+
+    console.log(`TopNode LargestSum := ${largestSum}`);
+  }
+};
