@@ -33,6 +33,8 @@ NOTE: As there are only 16384 routes, it is possible to solve this problem by tr
 */
 
 var common = require("./common");
+var log = require("./log");
+
 var Node = require("./treeNodeModule");
 
 const fs = require("fs");
@@ -79,7 +81,7 @@ module.exports = {
 
     var topNode = new Node(dataArray[0][0]);
 
-    console.log("Loading Tree");
+    log.debug("Loading Tree");
 
     addChildren(topNode, 0, 0);
 
@@ -87,6 +89,6 @@ module.exports = {
 
     var largestSum = topNode.findLargestSum();
 
-    console.log(`Tree Largest Sum is '${largestSum}'`);
+    log.yellow(`Tree Largest Sum is '${largestSum}'`);
   }
 };

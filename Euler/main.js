@@ -1,4 +1,3 @@
-var common = require("./common");
 var log = require("./log");
 
 log.info("This is my NodeJs Project Euler Test Runner")
