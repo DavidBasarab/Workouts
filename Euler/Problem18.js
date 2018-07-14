@@ -47,14 +47,7 @@ async function getData() {
 
 module.exports = {
     solveProblem: async function () {
-        /*
-            TODO
-
-            1) Need to create a tree from given data
-            2) Traverse the tree only taking the "greater nodes"
-            3) Sum the values of the nodes
-        */
-
+        
         var data = await getData();
 
         var lines = data.toString().split("\n");
@@ -64,10 +57,6 @@ module.exports = {
         for (var i = 0; i < lines.length; i++) {
             dataArray.push(lines[i].trim().split(' '));
         }
-
-        // dataArray.forEach((element, index) => {
-        //     console.log(`[${index}] := ${element}`);
-        // });
 
         function addChildren(node, row, column) {
 
