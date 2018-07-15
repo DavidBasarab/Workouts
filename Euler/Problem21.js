@@ -34,7 +34,7 @@ function getSumOfFactorsLessThanNumber(number) {
     return common.sumArray(factors);
 }
 
-var factorSum = [];
+var factorSums = [];
 
 module.exports = {
     solveProblem: async function () {
@@ -42,13 +42,45 @@ module.exports = {
         log.debug(`Creating factor Sum Array`);
 
         for (var i = 0; i < 10000; i++) {
-            factorSum.push(getSumOfFactorsLessThanNumber(i));
+            var sumOfFactors = getSumOfFactorsLessThanNumber(i);
+
+            factorSums.push(sumOfFactors);
         }
 
-        log.debug(`Done creating factor sum array | factorSum.length := ${factorSum.length}`);
+        log.debug(`Done creating factor sum array | factorSum.length := ${factorSums.length}`);
 
-        for (var i = 0; i < factorSum.length; i++) {
+        log.debug(`factorSums[220] := ${factorSums[220]} | factorSums := ${factorSums[284]}`);
 
+        var amicableNumbers = [];
+
+        for (var i = 1; i < factorSums.length; i++) {
+            var currentSum = factorSums[i];
+
+            if (currentSum === 0 || currentSum === 1) continue;
+
+            //log.cyan(`${i} sum := ${currentSum}`);
+
+            var indexOfOther = factorSums.indexOf(currentSum);
+
+            if (indexOfOther != -1) {
+
+                var otherSum = factorSums[indexOfOther];
+
+                if (i !== indexOfOther) {
+
+                    log.cyan(`${i} sum := ${currentSum} | IndexOfOther := ${indexOfOther} | SumOfOther := ${otherSum}`);
+
+                    if (!amicableNumbers.includes(i)) {
+                        amicableNumbers.push(i);
+                    }
+
+                    if (!amicableNumbers.includes(indexOfOther)) {
+                        amicableNumbers.push(indexOfOther);
+                    }
+                }
+            }
         }
+
+        log.magenta(`Sum of Amicable Numbers := ${common.sumArray(amicableNumbers)} | Amicable Count := ${amicableNumbers.length}`);
     }
 }
