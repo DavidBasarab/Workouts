@@ -27,7 +27,7 @@ module.exports = {
 
         var max = 10000;
 
-        primes = this.calulatePrimes(max);
+        primes = this.calculatePrimes(max);
 
         return primes;
     },
@@ -50,7 +50,7 @@ module.exports = {
 
         return product;
     },
-    calulatePrimes: function (max) {
+    calculatePrimes: function (max) {
 
         console.log(`Calculating all the primes up to ${max}`);
 
