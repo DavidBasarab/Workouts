@@ -14,11 +14,13 @@ var log = require("./log");
 
 function removeItem(item, array) {
     var index = array.indexOf(item);
-    
+
     if (index !== -1) array.splice(index, 1);
 }
 
 function getFactorsWithoutNumber(number) {
+    if (number === 0) return 0;
+
     var factors = common.getFactors(number);
 
     removeItem(number, factors);
@@ -32,12 +34,21 @@ function getSumOfFactorsLessThanNumber(number) {
     return common.sumArray(factors);
 }
 
+var factorSum = [];
+
 module.exports = {
     solveProblem: async function () {
-        var number = 220;
-        var secondNumber = 284;
 
-        log.info(`For ${number} has factors if ${getFactorsWithoutNumber(number)} | Sum of Factors := ${getSumOfFactorsLessThanNumber(number)}`);
-        log.info(`For ${secondNumber} has factors if ${getFactorsWithoutNumber(secondNumber)} | Sum of Factors := ${getSumOfFactorsLessThanNumber(secondNumber)}`);
+        log.debug(`Creating factor Sum Array`);
+
+        for (var i = 0; i < 10000; i++) {
+            factorSum.push(getSumOfFactorsLessThanNumber(i));
+        }
+
+        log.debug(`Done creating factor sum array | factorSum.length := ${factorSum.length}`);
+
+        for (var i = 0; i < factorSum.length; i++) {
+
+        }
     }
 }
