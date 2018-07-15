@@ -12,75 +12,27 @@
 var common = require("./common");
 var log = require("./log");
 
-function removeItem(item, array) {
-    var index = array.indexOf(item);
+function sumOfDivisors(number) {
+    var sum = 0;
 
-    if (index !== -1) array.splice(index, 1);
+    for(var i = 1; i < number; i++) {
+        if(number % i === 0) sum += i;
+    }
+
+    return sum;
 }
-
-function getFactorsWithoutNumber(number) {
-    if (number === 0) return 0;
-
-    var factors = common.getFactors(number);
-
-    removeItem(number, factors);
-
-    return factors;
-}
-
-function getSumOfFactorsLessThanNumber(number) {
-    var factors = getFactorsWithoutNumber(number);
-
-    return common.sumArray(factors);
-}
-
-var factorSums = [];
 
 module.exports = {
     solveProblem: async function () {
 
-        log.debug(`Creating factor Sum Array`);
+        var sum = 0;
 
-        for (var i = 0; i < 10000; i++) {
-            var sumOfFactors = getSumOfFactorsLessThanNumber(i);
+        for(var a = 1; a < 10000; a++) {
+            var b = sumOfDivisors(a);
 
-            factorSums.push(sumOfFactors);
+            if(b > a && sumOfDivisors(b) === a) sum = sum + a + b;
         }
 
-        log.debug(`Done creating factor sum array | factorSum.length := ${factorSums.length}`);
-
-        log.debug(`factorSums[220] := ${factorSums[220]} | factorSums := ${factorSums[284]}`);
-
-        var amicableNumbers = [];
-
-        for (var i = 1; i < factorSums.length; i++) {
-            var currentSum = factorSums[i];
-
-            if (currentSum === 0 || currentSum === 1) continue;
-
-            //log.cyan(`${i} sum := ${currentSum}`);
-
-            var indexOfOther = factorSums.indexOf(currentSum);
-
-            if (indexOfOther != -1) {
-
-                var otherSum = factorSums[indexOfOther];
-
-                if (i !== indexOfOther) {
-
-                    log.cyan(`${i} sum := ${currentSum} | IndexOfOther := ${indexOfOther} | SumOfOther := ${otherSum}`);
-
-                    if (!amicableNumbers.includes(i)) {
-                        amicableNumbers.push(i);
-                    }
-
-                    if (!amicableNumbers.includes(indexOfOther)) {
-                        amicableNumbers.push(indexOfOther);
-                    }
-                }
-            }
-        }
-
-        log.magenta(`Sum of Amicable Numbers := ${common.sumArray(amicableNumbers)} | Amicable Count := ${amicableNumbers.length}`);
+        log.cyan(`Sum := ${sum}`);
     }
 }
