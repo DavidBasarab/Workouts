@@ -1,3 +1,5 @@
+var BigInt = require("big-integer");
+
 var primes = null;
 
 module.exports = {
@@ -5,9 +7,11 @@ module.exports = {
         return value % multipleNumber == 0;
     },
     factorial: function (number) {
-        if (number === 0) return 1;
+        var bigNumber = new BigInt(number);
 
-        return number * this.factorial(number - 1);
+        if (bigNumber.equals(0)) return new BigInt(1);
+
+        return bigNumber.multiply(this.factorial(bigNumber.minus(1)));
     },
     isEven: function (value) {
         return this.isMultipleOf(value, 2);
