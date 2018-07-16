@@ -17,8 +17,55 @@ const util = require("util");
 // Convert fs.readFile into Promise version of same
 const readFile = util.promisify(fs.readFile);
 
+var letterValues = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z'
+];
+
 async function getData() {
     return await readFile("./Problem22Data.txt");
+}
+
+function getLetterValue(letter) {
+    var index = letterValues.indexOf(letter);
+
+    return index + 1;
+}
+
+function findWordValue(word) {
+    var value = 0;
+
+    for (var i = 0; i < word.length; i++) {
+        var letterValue = getLetterValue(word[i]);
+
+        value += letterValue;
+    }
+
+    return value;
 }
 
 module.exports = {
@@ -36,8 +83,16 @@ module.exports = {
             list[i] = list[i].replace("\"", "");
         }
 
-        for (var i = 0; i < 20; i++) {
-            log.cyan(`list[${i}] := ${list[i]}`);
+        var totalValue = 0;
+
+        for (var i = 0; i < list.length; i++) {
+            var wordValue = findWordValue(list[i]);
+
+            var score = wordValue * (i + 1);
+
+            totalValue += score;
         }
+
+        log.magenta(`Total Scores := ${totalValue}`);
     }
 }
