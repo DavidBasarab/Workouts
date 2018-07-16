@@ -133,5 +133,10 @@ module.exports = {
         internalCombiner([], array, this.productOfArray);
 
         return result;
+    },
+    removeItemFromArray: function (item, array) {
+        var index = array.indexOf(item);
+
+        if (index !== -1) array.splice(index, 1);
     }
 }.runOnLoad();
