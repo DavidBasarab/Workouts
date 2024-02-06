@@ -4,26 +4,26 @@ namespace IOCLearning;
 
 public sealed class Worker(IMessageWriter messageWriter) : BackgroundService
 {
-	public override Task StartAsync(CancellationToken cancellationToken)
-	{
-		messageWriter.Write("Starting worker");
+    public override Task StartAsync(CancellationToken cancellationToken)
+    {
+        messageWriter.Write("Starting worker");
 
-		return base.StartAsync(cancellationToken);
-	}
+        return base.StartAsync(cancellationToken);
+    }
 
-	public override Task StopAsync(CancellationToken cancellationToken)
-	{
-		messageWriter.Write("Stopping worker");
+    public override Task StopAsync(CancellationToken cancellationToken)
+    {
+        messageWriter.Write("Stopping worker");
 
-		return base.StopAsync(cancellationToken);
-	}
+        return base.StopAsync(cancellationToken);
+    }
 
-	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-	{
-		while (!stoppingToken.IsCancellationRequested)
-		{
-			messageWriter.Write($"Worker running at: {DateTimeOffset.Now}");
-			await Task.Delay(1_000, stoppingToken);
-		}
-	}
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            messageWriter.Write($"Worker running at: {DateTimeOffset.Now}");
+            await Task.Delay(1_000, stoppingToken);
+        }
+    }
 }
